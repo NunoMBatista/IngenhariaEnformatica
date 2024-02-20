@@ -1,0 +1,57 @@
+3012--1
+SELECT * 
+FROM dep;
+
+--2
+SELECT nome, funcao, sal, ndep
+FROM emp;
+
+--3
+SELECT nome, ndep, sal
+FROM emp
+WHERE sal BETWEEN 150000 AND 300000;
+
+--4
+SELECT *
+FROM dep
+ORDER BY ndep DESC;
+
+--5
+SELECT distinct funcao 
+FROM emp;
+
+--6
+SELECT nome, funcao, premios
+FROM emp
+WHERE premios IS NOT null;
+
+--7
+SELECT *
+FROM emp
+WHERE ndep IN (10, 30);
+
+--8
+SELECT nome
+FROM emp
+WHERE funcao = 'Analista';
+
+--9
+SELECT nome, funcao 
+FROM emp
+WHERE nome like '%v%' OR nome like '%u%';
+
+--10
+SELECT nome, funcao
+FROM emp 
+WHERE (nome like 'A%' AND nome like '%us%') OR (nome like 'R%' AND nome like '%ei%');
+
+--11
+SELECT nome, funcao, sal * 12 "Remuneração Anual"
+FROM emp;
+
+--12
+SELECT nome, CAST(0.1*(sal*12 + premios) AS int) "10% Sal. Anual", premios
+FROM emp
+WHERE (premios < 0.1*(sal*12 + premios)) AND funcao = 'Vendedor'
+ORDER BY 0.1*(sal*12 + premios) ASC, nome;
+

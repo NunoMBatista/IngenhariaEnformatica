@@ -1,0 +1,69 @@
+--SELECT emp.nome, funcao, dep.nome
+--FROM emp, dep
+--WHERE emp.ndep = dep.ndep
+--ORDER BY dep.nome, emp.nome;
+
+--SELECT emp.nome, emp.sal, emp.ndep, dep.nome
+--FROM emp, dep
+--WHERE emp.ndep = dep.ndep AND emp.nome LIKE 'A% R%'
+
+--SELECT emp.nome, emp.sal, dep.nome, dep.local
+--FROM emp, dep
+--WHERE emp.ndep = dep.ndep AND emp.sal < 150000;
+
+--SELECT DISTINCT(descontos.escalao), emp.funcao
+--FROM descontos, emp
+--WHERE emp.sal <= descontos.salsup AND emp.sal >= salinf;
+
+--SELECT emp.nome, emp.funcao, emp.sal
+--FROM emp, descontos
+--WHERE emp.sal <= descontos.salsup AND emp.sal >= salinf AND descontos.escalao = 4
+--ORDER BY emp.nome
+
+--SELECT emp.nome, emp.funcao, emp.sal, dep.nome
+--FROM emp, descontos, dep
+--WHERE emp.sal <= descontos.salsup AND emp.sal >= salinf AND descontos.escalao = 4 AND dep.ndep = emp.ndep
+--ORDER BY emp.nome
+
+--SELECT emp.nome, emp.funcao, emp.sal, dep.local
+--FROM emp, dep
+--WHERE dep.local LIKE 'Coimbra' AND emp.sal > 150000 AND emp.ndep = dep.ndep
+--ORDER BY emp.nome;
+
+--SELECT emp.nome, emp.funcao, descontos.escalao, dep.nome
+--FROM emp, dep, descontos
+--WHERE emp.funcao NOT LIKE 'Continuo' AND emp.sal <= descontos.salsup AND emp.sal >= salinf AND emp.ndep = dep.ndep
+--ORDER BY descontos.escalao DESC, dep.nome;
+
+--SELECT e2.nome, e1.nome
+--FROM emp as e1, emp as e2
+--WHERE e1.encar = e2.nemp
+--ORDER BY e2.nome ASC, e1.nome
+
+--SELECT dep.ndep, dep.nome, dep.local 
+--FROM dep
+--EXCEPT
+--SELECT d.ndep, d.nome, d.local 
+--FROM dep d
+--JOIN emp e ON d.ndep = e.ndep ;
+
+--ALTER TABLE emp ALTER COLUMN ndep DROP NOT NULL;
+--INSERT INTO emp VALUES
+--(9999, 'Deity', 'Omnipresent', NULL, CURRENT_DATE, 0, NULL, NULL),
+--(9998, 'Shadow Gov', 'Omnipresent', NULL, CURRENT_DATE, 0, NULL, NULL);
+--INSERT INTO dep VALUES (99, 'Empty', 'Nowhere');
+
+--SELECT emp.nome, dep.nome
+--FROM emp LEFT JOIN dep ON emp.ndep = dep.ndep
+--WHERE dep.nome IS NULL OR dep.nome = 'Vendas'
+
+--SELECT e1.nome "Empregado", e2.nome "Encarregado", dep.nome "Departamento"
+--FROM dep, emp AS e1, emp AS e2
+--WHERE e1.encar = e2.nemp AND
+--dep.ndep = e1.ndep or e1.ndep IS NULL;
+	
+--DELETE FROM emp WHERE nemp IN (9999, 9998);
+--DELETE FROM dep WHERE ndep = 99;
+--ALTER TABLE emp ALTER COLUMN ndep SET NOT NULL;
+
+
