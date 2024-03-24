@@ -1,0 +1,45 @@
+4.1
+A complexidade de inserção de um elemento na árvore binária, assumindo que já lá estão N elementos é O(N),
+uma vez que, antes da inserção propriamente dita, é necessário percorrer a árvore completa para verificar 
+se o elemento já existe. Se não existir, é necessário percorrer a árvore novamente para encontrar o local correto
+cujo pior caso é também O(N), quando a árvore é equivalente a uma lista ligada (todos os elementos estão
+à esquerda ou à direita do nó raiz). Assim, a complexidade total é O(N) + O(N) = O(N) e a complexidade de 
+inserção de N elementos é O(N²). Os melhores resultados foram obtidos para o conjunto aleatório com 90% de
+elementos repetidos pois a verificação inicial é mais rápida.
+
+4.2
+A complexidade de inserção de um elemento na árvore binária de pesquisa, no pior caso (assumindo que já lá
+estão N elementos) é O(N), o pior caso acontece nos conjuntos ordenados pois a árvore acaba por ser equivalente 
+a uma lista ligada, assim, a complexidade total de inserção de N elementos é O(N²). 
+
+No entanto, no caso médio, a complexidade é O(logN), quando a árvore árvore está balanceada e é necessário descer apenas logN níveis 
+para encontrar o local de inserção. Assim, a complexidade de inserção de N elementos é O(NlogN), este resultado é espectável
+no conjunto de aleatórios. Os melhores resultados foram obtidos para o
+conjunto aleatório com 90% de elementos repetidos, uma vez que a árvore não só tem tendência para ser mais 
+balanceada, como também vai ter menos elementos no total, o que se traduz para menos níveis a descer.
+
+4.3
+A complexidade de inserção na árvore AVL é O(logN), uma vez que a árvore é sempre balanceada é necessário
+descer logN níveis para encontrar o local de inserção e de seguida subir o mesmo número de níveis de modo a verificar
+o balanceamento. Assim, a complexidade de inserção de N elementos é O(NlogN) + O(NlogN) = O(NlogN). 
+Apesar da complexidade de inserção ser a mesma que a da árvore vermelha e preta, os resultados
+obtidos foram mais lentos na árvore AVL pois esta é mais estritamente balanceada (nunca pode haver um fator
+de balanceamento de -2 ou 2).
+
+Os piores resultados vieram do conjunto aleatório, uma vez que este conjunto
+gera muitos mais casos com rotações duplas.
+Apesar de ser mais lenta do que a VP a inserir, este balanceamento
+rígido vai levar a melhores tempos de pesquisa o que, em teoria, faz com que a AVL devesse ter um tempo 
+total do conjunto de aleatórios com 90% repetidos melhor do que a VP, uma vez que a AVL consegue detetar mais 
+rapidamente os elementos repetidos.
+
+4.4
+A complexidade de inserção na árvore vermelha e preta é O(logN), uma vez que a árvore é balanceada, mesmo que não de maneira
+tão rígida, é necessário descer logN níveis para encontrar o local de inserção. Assim, a complexidade de inserção de N elementos é O(NlogN).
+Os resultados obtidos foram melhores que os da árvore AVL, uma vez que esta é menos estritamente balanceada, o que
+significa que não é necessário fazer tantas verificações para garantir que a árvore está balanceada. Os piores resultados foram obtidos para o
+conjunto aleatório com 10% de elementos repetidos, uma vez que a árvore é obrigada a fazer mais rotações. Claro
+que apesar de ser mais rápida a inserir, este balanceamento menos rígido vai levar a piores tempos de pesquisa em relação à AVL.
+É de notar que apesar de, em média, a árvore vermelha e preta requerer menos rotações que a AVL, no caso dos conjuntos ordenados, 
+o número de rotações necessárias é semelhante, uma vez que tanto as regras da vermelha e preta como as da AVL são violadas a
+quase todas as inserções.
