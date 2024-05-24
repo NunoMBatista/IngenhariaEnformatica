@@ -1,0 +1,21 @@
+1 - O insertion sort tem complexidade O(N²) assintoticamente pois no pior caso possível (quando temos um array ordenado por ordem decrescente) para cada elemento, é necessário percorrer todo o array até ao momento novamente até encontrar um elemento de valor inferior ao selecionado. No entanto, no melhor caso, ou seja, quando o vetor está ordenado por ordem crescente, a complexidade é O(N), uma vez que
+basta percorrer o array uma única vez para verificar que já está ordenado.
+Adicionalmente, este é um algoritmo estável, pois a ordem de dois elementos só é alterada quando um é estritamente maior que o outro.
+É também um algoritmo in-place, uma vez que a memória adicional necessária é O(1).
+
+O pior caso, empiricamente, foi o array ordenado por ordem decrescente, uma vez que, para cada elemento, é necessário percorrer todo o array até ao momento para encontrar a posição correta 
+de inserção
+
+2 - O heap sort tem complexidade O(NlogN) para qualquer caso, uma vez que a construção do max heap é O(N) (não influencia assintoticamente) e para remover cada elemento da max heap, é necessário percorrer a árvore binária
+que tem altura logN, este passo é executado para cada um dos N elementos, daí a complexidade (como só é necessário fazer o max heap no início, a sua complexidade O(N) não afeta a complexidade final.
+
+Como era de esperar, os tempos de execução empíricos do heap sort não diferem muito dependendo do tipo de array, é sempre O(NlogN).
+É de notar que este algoritmo não é estável, por exemplo, se tivermos dois elementos iguais, o que for encontrado primeiro é inserido à frente do outro, o que pode alterar a ordem inicial. É também in-place, pois a heap está guardada no próprio array, não em memória adicional.
+
+
+3 - O quicksort tem complexidade O(NlogN) no caso médio, uma vez que para cada partição, é necessário percorrer o array uma vez, e o tamanho desse subarray
+vai sendo dividido por 2 a cada iteração, daí a complexidade. No entanto, no pior caso (nesta implementação, na qual o pivot escolhido é o último elemento) a complexidade é O(N²). Evidentemente, uma possível melhoria seria escolher a mediana de 3 como pivot (e dar logo swap aos elementos usados para calcular a mediana) ou até mesmo substituir o quicksort pelo insertion sort quando o número de elementos é reduzido.
+
+O pior caso O(N²) ocorre quando o pivot escolhido é o maior ou o menor do sub-array, nesse caso a partição não divide o array em dois subarrays de tamanhos semelhantes, simplesmente divide em um array de tamanho N-1 e outro de tamanho 1, isto acontece nos arrays ordenados por ordem crescente e decrescente, daí que tenham tido os piores tempos empiricamente.
+
+Esta implementação do quicksort não é estável, uma vez que os elementos são trocados de posição em relação ao pivot sem tomar em consideração a ordem inicial, no entanto, é in-place, pois a memória adicional necessária é também O(1).
