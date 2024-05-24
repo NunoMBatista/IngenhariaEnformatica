@@ -1,14 +1,10 @@
 import flask
-import logging
 import psycopg2
-import time
-import jwt
-from datetime import datetime
 from flask_jwt_extended import get_jwt_identity, get_jwt
 from psycopg2.extras import RealDictCursor
 
 
-from global_functions import db_connection, logger, StatusCodes, check_required_fields
+from global_functions import db_connection, logger, StatusCodes
 
 def get_appointments(user_id):
     # A patient can only view their own appointments

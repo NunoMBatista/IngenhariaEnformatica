@@ -1,3 +1,6 @@
+BEGIN;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- Set the transaction isolation level to SERIALIZABLE to prevent dirty reads
+
 WITH months AS ( -- We need to generate a list of months to ensure we have a row for each month, even if there are no surgeries
     SELECT TO_CHAR(date_trunc(
                     'month', 
@@ -25,3 +28,5 @@ SELECT
 FROM months
 LEFT JOIN surgeries ON months.month = surgeries.month AND surgeries.rank = 1 -- Only show the doctor with the most surgeries in each month
 ORDER BY TO_DATE(months.month, 'YYYY Month') DESC;
+
+COMMIT;

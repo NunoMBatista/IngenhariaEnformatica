@@ -1,6 +1,5 @@
 import hashlib
 import os
-import binascii
 
 ITERATIONS = 100000
 ALGORITHM = 'sha256'

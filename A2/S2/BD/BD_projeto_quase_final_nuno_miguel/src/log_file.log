@@ -2581,3 +2581,18 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'docseven', 'nationality': 'Spanish', 'phone': '262511112', 'birthday': '1980-01-01', 'email': 'do111@gmail.com', 'password': 'docseven', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'university': 'Stanford', 'graduation_date': '2005-01-01', 'specializations': ['Neurophysiology']}
 INFO:werkzeug:127.0.0.1 - - [24/May/2024 18:30:43] "POST /dbproj/register/doctor HTTP/1.1" 200 -
+INFO:logger:Starting HMS server on http://127.0.0.1:8080
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:logger:Starting HMS server on http://127.0.0.1:8080
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 19:49:02] "[31m[1mPOST /dbproj/prescription HTTP/1.1[0m" 401 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'docone@gmail.com', 'password': 'docone'}
+DEBUG:logger:POST /dbproj/user - user_id: 2, role: doctor
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 19:49:12] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'type': 'appointment', 'event_id': 1, 'validity': '2014-01-02', 'medicines': [{'medicine': 'Morphine', 'posology_dose': 123, 'posology_frequency': 'Morning'}]}
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 19:49:20] "POST /dbproj/prescription HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 19:49:25] "POST /dbproj/prescription HTTP/1.1" 200 -

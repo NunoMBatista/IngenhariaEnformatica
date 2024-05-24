@@ -1,9 +1,5 @@
 import flask
-import logging
 import psycopg2
-import time
-import jwt
-from datetime import datetime
 
 from global_functions import db_connection, logger, StatusCodes, check_required_fields, payload_contains_dangerous_chars
 from hashing import hash_password
@@ -63,7 +59,6 @@ def insert_doctor(cur, user_id, university, graduation_date, specializations):
         if spec_id is None:
             raise Exception(f'Specialization {spec_name} does not exist')
         spec_id = spec_id[0]
-        
         
         cur.execute("""
                     INSERT INTO specialization_doctor (specialization_spec_id, doctor_employee_contract_service_user_user_id)

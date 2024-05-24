@@ -1,27 +1,11 @@
 -> TENTAR METER AS QUERIES QUE DEPENDEM UMAS DAS OUTRAS COMO SUBQUERIES
 
--> VERIFICAR SE HÁ MANEIRA DE CHECK NURSE AVAILABILITY SER VERIFICADA PELA PRÓPRIA BASE DE DADOS
-
 -> ARGUMENTO CONTRA FALTA DE SURG TYPE TABLE: UM ASSISTANT SABE OS SURG TYPES EXISTENTES
 
--> EXCEPTIONS NORMAIS PARA INFORMAR O USER THE QUE ELE É QUE FALHOU
-
--> ADD COMMIT_SUCCESS
-
--> Concurrency issues prescription?
-
--> talvez meter check fields antes de db connect??
-
--> continuar get prescriptions
-
--> CHECK RESTRICTIONS IN THE QUERIES!
-
--> concurrency issues top3
-
--> REMOVE APPOINTMENTS/SURGERIES PRE-HOJE
-
--> COMMENT QUERIES
+-> ADD COMMIT_SUCCES
 
 -> Mencionar que assumimos que a validade começa na data da prescrição
 
 -> Talvez usar group by no doctor availability (unite surg + app)
+
+-> dockerfile?

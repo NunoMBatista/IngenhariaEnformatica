@@ -1,10 +1,5 @@
 import flask
-import logging
 import psycopg2
-import time
-import jwt
-from datetime import datetime
-from flask_jwt_extended import get_jwt_identity
 from psycopg2.extras import RealDictCursor
 
 from global_functions import db_connection, logger, StatusCodes
@@ -17,16 +12,12 @@ def top3():
     conn = db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
     
-    try:
-        cur.execute("BEGIN;")
-        
+    try:       
         with open('queries/top3.sql', 'r') as f:
             query = f.read()
+            cur.execute(query)
         
-        cur.execute(query)
-        
-        top3_list = cur.fetchall()
-        
+        top3_list = cur.fetchall()     
         response = {
             'status': StatusCodes['success'],
             'errors': None,
@@ -44,5 +35,6 @@ def top3():
     finally:
         if conn is not None:
             conn.close()
+            cur.close()
             
         return flask.jsonify(response)

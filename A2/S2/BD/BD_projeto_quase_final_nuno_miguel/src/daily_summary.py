@@ -3,11 +3,9 @@ import logging
 import psycopg2
 import time
 import jwt
-from datetime import datetime
-from flask_jwt_extended import get_jwt_identity
 from psycopg2.extras import RealDictCursor
 
-from global_functions import db_connection, logger, StatusCodes, check_required_fields, APPOINTMENT_DURATION, SURGERY_DURATION
+from global_functions import db_connection, logger, StatusCodes
 
 def daily_summary(date_str):
     # Write to debug log
@@ -18,12 +16,9 @@ def daily_summary(date_str):
     cur = conn.cursor(cursor_factory=RealDictCursor)
     
     try:
-        cur.execute("BEGIN;")
-        
         with open('queries/daily_summary.sql', 'r') as f:
             query = f.read()
-        
-        cur.execute(query, (date_str, date_str, date_str))
+            cur.execute(query, (date_str, date_str, date_str))
         
         summary = cur.fetchall()
         
@@ -44,5 +39,6 @@ def daily_summary(date_str):
     finally:
         if conn is not None:
             conn.close()
+            cur.close()
             
         return flask.jsonify(response)

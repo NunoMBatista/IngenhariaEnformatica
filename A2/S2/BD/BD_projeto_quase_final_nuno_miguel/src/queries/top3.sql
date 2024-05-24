@@ -1,3 +1,6 @@
+BEGIN;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- Set the transaction isolation level to SERIALIZABLE to prevent dirty reads
+
 WITH top_patients AS (
     -- Get the sum of payments for each patient
     SELECT patient_service_user_user_id AS patient_id, SUM(amount) AS total_paid
@@ -27,3 +30,6 @@ LEFT JOIN appointment a ON tp.patient_id = a.patient_service_user_user_id -- Joi
 LEFT JOIN hospitalization h ON tp.patient_id = h.patient_service_user_user_id -- Join the hospitalization with the top patients
 GROUP BY su.name, tp.total_paid -- Group by patient name and total paid
 ORDER BY tp.total_paid DESC; -- Order by total paid in descending order
+
+
+COMMIT;

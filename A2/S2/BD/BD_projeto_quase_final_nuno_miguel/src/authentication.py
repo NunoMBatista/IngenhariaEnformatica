@@ -1,13 +1,10 @@
 import flask
-import logging
-import jwt
 import psycopg2
-import datetime
 from flask_jwt_extended import create_access_token, get_jwt, set_access_cookies
 from functools import wraps
 
 from global_functions import db_connection, logger, StatusCodes, check_required_fields, payload_contains_dangerous_chars
-from hashing import hash_password, verify_password
+from hashing import verify_password
 
 # Authenticate a user and return an access token
 def authenticate_user():
@@ -18,7 +15,6 @@ def authenticate_user():
             'errors': 'Payload contains dangerous characters'
         }
         return flask.jsonify(response)
-    
     
     # Connect to the database
     conn = db_connection()
@@ -37,6 +33,8 @@ def authenticate_user():
         return flask.jsonify(response)        
     
     try:
+        cur.execute('BEGIN;')
+        
         # Query the database for the user_id
         cur.execute("""
                     SELECT user_id, password FROM service_user
@@ -101,6 +99,8 @@ def authenticate_user():
         
         # Set the access token as a cookie 
         set_access_cookies(response, access_token)
+        
+        cur.execute('COMMIT;')
                 
     except(Exception, psycopg2.DatabaseError) as error:
         logger.error(f'POST /dbproj/user - error: {error}')

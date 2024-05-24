@@ -1,3 +1,6 @@
+BEGIN;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- Set the transaction isolation level to SERIALIZABLE to prevent dirty reads
+
 WITH payments_sum AS (
     SELECT SUM(amount) AS amount_spent -- Get the sum of every payment 
     FROM payment
@@ -18,3 +21,5 @@ SELECT
     COALESCE((SELECT amount_spent FROM payments_sum), 0) AS amount_spent,
     COALESCE((SELECT surgeries FROM surgeries_count), 0) AS surgeries,
     COALESCE((SELECT prescriptions FROM prescriptions_count), 0) AS prescriptions; 
+
+COMMIT;

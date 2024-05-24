@@ -1,10 +1,6 @@
-import flask
 import logging
 import psycopg2
-import time
-import jwt
 
-from datetime import datetime
 
 """
     Global variabless
@@ -106,9 +102,19 @@ def string_contains_dangerous_chars(input_str):
 # Check if a payload contains dangerous characters
 def payload_contains_dangerous_chars(payload):
     for key, value in payload.items():
-        # Ignore if it's not a string
-        if not isinstance(value, str):
-            continue
-        if string_contains_dangerous_chars(value):
-            return True
+        # If it's a dictionary, recursively call the function
+        if isinstance(value, dict):
+            if payload_contains_dangerous_chars(value):
+                return True
+        # If it's a list or tuple, iterate over the elements and check each one
+        elif isinstance(value, (list, tuple)):
+            for element in value:
+                if (isinstance(element, str) and string_contains_dangerous_chars(element)):
+                    return True
+                elif (isinstance(element, dict) and payload_contains_dangerous_chars(element)):
+                    return True
+        # If it's a string, check for dangerous characters
+        elif isinstance(value, str):
+            if string_contains_dangerous_chars(value):
+                return True
     return False
