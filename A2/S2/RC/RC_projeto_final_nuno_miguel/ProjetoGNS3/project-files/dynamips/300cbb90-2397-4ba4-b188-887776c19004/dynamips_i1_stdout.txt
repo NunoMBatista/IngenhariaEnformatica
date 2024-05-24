@@ -1,0 +1,1 @@
+C2691 'Ghost': generic_nvram_extract_config: Unknown error -61605

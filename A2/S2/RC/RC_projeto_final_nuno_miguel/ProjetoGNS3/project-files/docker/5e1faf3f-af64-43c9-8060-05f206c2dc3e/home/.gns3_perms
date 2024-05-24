@@ -1,0 +1,12 @@
+664:1000:1001:/home/makefile
+664:1000:1001:/home/global.h
+664:1000:1001:/home/admin_commands.h
+664:1000:1001:/home/client_commands.h
+644:0:0:/home/.gns3_perms
+664:1000:1001:/home/class_server.c
+664:1000:1001:/home/class_client.c
+664:1000:1001:/home/admin_commands.c
+664:1000:1001:/home/configuration.conf
+664:1000:1001:/home/class_admin.c
+664:1000:1001:/home/client_commands.c
+777:0:0:/home

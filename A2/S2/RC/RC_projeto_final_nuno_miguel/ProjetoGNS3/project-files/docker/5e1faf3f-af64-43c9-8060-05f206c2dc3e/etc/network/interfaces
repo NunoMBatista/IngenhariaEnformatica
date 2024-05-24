@@ -1,0 +1,19 @@
+#
+# This is a sample network config, please uncomment lines to configure the network
+#
+
+# Uncomment this line to load custom interface files
+# source /etc/network/interfaces.d/*
+
+# Static config for eth0
+auto eth0
+iface eth0 inet static
+	address 10.5.2.2
+	netmask 255.255.255.192
+	gateway 10.5.2.62
+	up echo nameserver 192.168.0.1 > /etc/resolv.conf
+
+# DHCP config for eth0
+#auto eth0
+#iface eth0 inet dhcp
+#	hostname dei-rc_container-4

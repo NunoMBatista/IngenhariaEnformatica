@@ -1,0 +1,8 @@
+664:1000:1001:/etc/network/interfaces
+775:1000:1001:/etc/network/if-post-down.d
+775:1000:1001:/etc/network/if-up.d
+775:1000:1001:/etc/network/interfaces.d
+775:1000:1001:/etc/network/if-pre-up.d
+664:1000:1001:/etc/network/.gns3_perms
+775:1000:1001:/etc/network/if-down.d
+775:1000:1001:/etc/network
