@@ -1,0 +1,615 @@
+{
+	"info": {
+		"_postman_id": "51406545-ce19-4d30-b6c2-564406182c8d",
+		"name": "hms_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34038034"
+	},
+	"item": [
+		{
+			"name": "Register Patient",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate a random name",
+							"var names = [\"John\", \"Jane\", \"Bob\", \"Alice\", \"Charlie\", \"Megan\"];",
+							"pm.environment.set(\"name\", names[Math.floor(Math.random() * names.length)]);",
+							"",
+							"// Set a random nationality",
+							"var nationalities = [\"Portuguese\", \"Spanish\", \"French\", \"German\", \"Italian\"];",
+							"pm.environment.set(\"nationality\", nationalities[Math.floor(Math.random() * nationalities.length)]);",
+							"",
+							"// Generate a random phone number",
+							"pm.environment.set(\"phone\", Math.floor(Math.random() * 900000000) + 100000000);",
+							"",
+							"// Set a random birthday",
+							"pm.environment.set(\"birthday\", \"1980-01-01\");",
+							"",
+							"// Generate a random email",
+							"pm.environment.set(\"email\", \"user\" + Math.floor(Math.random() * 1000) + \"@gmail.com\");",
+							"",
+							"// Set a random password",
+							"pm.environment.set(\"password\", \"Password\" + Math.floor(Math.random() * 1000));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"PatientOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"PatientOne@gmail.com\",\n    \"password\": \"PatientOne\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/register/patient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"register",
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Assistant",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate a random name",
+							"var names = [\"John\", \"Jane\", \"Bob\", \"Alice\", \"Charlie\", \"Megan\"];",
+							"pm.environment.set(\"name\", names[Math.floor(Math.random() * names.length)]);",
+							"",
+							"// Set a random nationality",
+							"var nationalities = [\"Portuguese\", \"Spanish\", \"French\", \"German\", \"Italian\"];",
+							"pm.environment.set(\"nationality\", nationalities[Math.floor(Math.random() * nationalities.length)]);",
+							"",
+							"// Generate a random phone number",
+							"pm.environment.set(\"phone\", Math.floor(Math.random() * 900000000) + 100000000);",
+							"",
+							"// Set a random birthday",
+							"pm.environment.set(\"birthday\", \"1980-01-01\");",
+							"",
+							"// Generate a random email",
+							"pm.environment.set(\"email\", \"nurse\" + Math.floor(Math.random() * 1000) + \"@gmail.com\");",
+							"",
+							"// Set a random password",
+							"pm.environment.set(\"password\", \"Password\" + Math.floor(Math.random() * 1000));",
+							"",
+							"// Set a random contract start date",
+							"pm.environment.set(\"contract_start_date\", \"2022-01-01\");",
+							"",
+							"// Set a random contract end date",
+							"pm.environment.set(\"contract_end_date\", \"2023-01-01\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"AssistantOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"AssistantTwo@gmail.com\",\n    \"password\": \"AssistantTwo\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/register/assistant",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"register",
+						"assistant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Nurse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate a random name",
+							"var names = [\"John\", \"Jane\", \"Bob\", \"Alice\", \"Charlie\", \"Megan\"];",
+							"pm.environment.set(\"name\", names[Math.floor(Math.random() * names.length)]);",
+							"",
+							"// Set a random nationality",
+							"var nationalities = [\"Portuguese\", \"Spanish\", \"French\", \"German\", \"Italian\"];",
+							"pm.environment.set(\"nationality\", nationalities[Math.floor(Math.random() * nationalities.length)]);",
+							"",
+							"// Generate a random phone number",
+							"pm.environment.set(\"phone\", Math.floor(Math.random() * 900000000) + 100000000);",
+							"",
+							"// Set a random birthday",
+							"pm.environment.set(\"birthday\", \"1980-01-01\");",
+							"",
+							"// Generate a random email",
+							"pm.environment.set(\"email\", \"nurse\" + Math.floor(Math.random() * 1000) + \"@gmail.com\");",
+							"",
+							"// Set a random password",
+							"pm.environment.set(\"password\", \"Password\" + Math.floor(Math.random() * 1000));",
+							"",
+							"// Set a random contract start date",
+							"pm.environment.set(\"contract_start_date\", \"2022-01-01\");",
+							"",
+							"// Set a random contract end date",
+							"pm.environment.set(\"contract_end_date\", \"2023-01-01\");",
+							"",
+							"// Set a random rank_id",
+							"pm.environment.set(\"rank_id\", Math.floor(Math.random() * 3) + 1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\",\n    \"rank_id\": \"{{rank_id}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/register/nurse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"register",
+						"nurse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Doctor",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate a random name",
+							"var names = [\"John\", \"Jane\", \"Bob\", \"Alice\", \"Charlie\", \"Megan\"];",
+							"pm.environment.set(\"name\", names[Math.floor(Math.random() * names.length)]);",
+							"",
+							"// Set a random nationality",
+							"var nationalities = [\"Portuguese\", \"Spanish\", \"French\", \"German\", \"Italian\"];",
+							"pm.environment.set(\"nationality\", nationalities[Math.floor(Math.random() * nationalities.length)]);",
+							"",
+							"// Generate a random phone number",
+							"pm.environment.set(\"phone\", Math.floor(Math.random() * 900000000) + 100000000);",
+							"",
+							"// Set a random birthday",
+							"pm.environment.set(\"birthday\", \"1980-01-01\");",
+							"",
+							"// Generate a random email",
+							"pm.environment.set(\"email\", \"doctor\" + Math.floor(Math.random() * 1000) + \"@gmail.com\");",
+							"",
+							"// Set a random password",
+							"pm.environment.set(\"password\", \"Password\" + Math.floor(Math.random() * 1000));",
+							"",
+							"// Set a random contract start date",
+							"pm.environment.set(\"contract_start_date\", \"2022-01-01\");",
+							"",
+							"// Set a random contract end date",
+							"pm.environment.set(\"contract_end_date\", \"2023-01-01\");",
+							"",
+							"// Set a random university",
+							"var universities = [\"Harvard\", \"Stanford\", \"Cambridge\", \"Oxford\", \"MIT\"];",
+							"pm.environment.set(\"university\", universities[Math.floor(Math.random() * universities.length)]);",
+							"",
+							"// Set a random graduation date",
+							"pm.environment.set(\"graduation_date\", \"2005-01-01\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"DoctorOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"DoctorOne@gmail.com\",\n    \"password\": \"docseven\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\",\n    \"university\": \"{{university}}\",\n    \"graduation_date\": \"{{graduation_date}}\",\n    \"specializations\": [\"Neurophysiology\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/register/doctor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"register",
+						"doctor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"doctor_id\": \"2\",\n    \"date\": \"2026-01-01T00:11:00Z\",\n    \"type\": \"Primary Care\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"5\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"4\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/appointment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"appointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule Surgery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"patient_id\" : 13,\n    \"doctor\": 10,\n    \"date\": \"2011-01-15T020:10:00Z\",\n    \"type\": \"divertida\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"6\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"7\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/surgery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"surgery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Prescriptions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"appointment\",\n    \"event_id\": 1,\n    \"validity\": \"2014-01-02\",\n    \"medicines\":[\n        {\n            \"medicine\": \"Morphine\",\n            \"posology_dose\": 123,\n            \"posology_frequency\": \"Morning\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/prescription",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"prescription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Execute Payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 25,\n    \"payment_method\": \"MBWay\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/bills/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"bills",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Authentication",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"name": "cache-control",
+						"type": "text"
+					},
+					{
+						"key": "Postman-Token",
+						"value": "<calculated when request is sent>",
+						"name": "postman-token",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"name": "content-type",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": "<calculated when request is sent>",
+						"name": "content-length",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "<calculated when request is sent>",
+						"name": "host",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "PostmanRuntime/7.32.1",
+						"name": "user-agent",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"name": "accept",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"name": "accept-encoding",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"name": "connection",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"PatientOne@gmail.com\",\n    \"password\": \"PatientOne\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "See Appointments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/appointments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"appointments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Prescriptions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/prescriptions/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"prescriptions",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Top 3 Patients",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/top3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"top3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Daily Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/daily/2024-05-23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"daily",
+						"2024-05-23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate a Monthly Report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
