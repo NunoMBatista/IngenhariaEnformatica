@@ -108,7 +108,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"AssistantOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"AssistantTwo@gmail.com\",\n    \"password\": \"AssistantTwo\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\"\n}",
+					"raw": "{\n    \"name\": \"AssistantOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"AssistantOne@gmail.com\",\n    \"password\": \"AssistantOne\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,7 +248,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"DoctorOne\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"DoctorOne@gmail.com\",\n    \"password\": \"docseven\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\",\n    \"university\": \"{{university}}\",\n    \"graduation_date\": \"{{graduation_date}}\",\n    \"specializations\": [\"Neurophysiology\"]\n}",
+					"raw": "{\n    \"name\": \"DoctorTwo\",\n    \"nationality\": \"{{nationality}}\",\n    \"phone\": \"{{phone}}\",\n    \"birthday\": \"{{birthday}}\",\n    \"email\": \"DoctorTwo@gmail.com\",\n    \"password\": \"DoctorTwo\",\n    \"contract_start_date\": \"{{contract_start_date}}\",\n    \"contract_end_date\": \"{{contract_end_date}}\",\n    \"university\": \"{{university}}\",\n    \"graduation_date\": \"{{graduation_date}}\",\n    \"specializations\": [\"Neurophysiology\", \"Pediatric Neurology\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +278,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"doctor_id\": \"2\",\n    \"date\": \"2026-01-01T00:11:00Z\",\n    \"type\": \"Primary Care\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"5\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"4\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
+					"raw": "{\n    \"doctor_id\": \"2\",\n    \"date\": \"2026-01-01T00:11:00Z\",\n    \"type\": \"Primary Care\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"3\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"4\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -307,7 +307,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"patient_id\" : 13,\n    \"doctor\": 10,\n    \"date\": \"2011-01-15T020:10:00Z\",\n    \"type\": \"divertida\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"6\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"7\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
+					"raw": "{\n    \"patient_id\" : 1,\n    \"doctor\": 2,\n    \"date\": \"2024-05-15T020:10:00Z\",\n    \"type\": \"Ophthalmology\",\n    \"nurses\": [\n        {\n            \"nurse_id\": \"3\",\n            \"role\": \"Euthanasist\"\n        },\n        {\n            \"nurse_id\": \"4\",\n            \"role\": \"Preoperative\"\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -315,7 +315,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/dbproj/surgery",
+					"raw": "http://localhost:8080/dbproj/surgery/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -323,7 +323,8 @@
 					"port": "8080",
 					"path": [
 						"dbproj",
-						"surgery"
+						"surgery",
+						"1"
 					]
 				}
 			},
@@ -336,7 +337,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"type\": \"appointment\",\n    \"event_id\": 1,\n    \"validity\": \"2014-01-02\",\n    \"medicines\":[\n        {\n            \"medicine\": \"Morphine\",\n            \"posology_dose\": 123,\n            \"posology_frequency\": \"Morning\"\n        }\n    ]\n}",
+					"raw": "{\n    \"type\": \"hospitalization\",\n    \"event_id\": 1,\n    \"validity\": \"2014-01-02\",\n    \"medicines\":[\n        {\n            \"medicine\": \"Morphine\",\n            \"posology_dose\": 123,\n            \"posology_frequency\": \"Morning\"\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -373,7 +374,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/dbproj/bills/7",
+					"raw": "http://localhost:8080/dbproj/bills/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -382,7 +383,7 @@
 					"path": [
 						"dbproj",
 						"bills",
-						"7"
+						"1"
 					]
 				}
 			},
@@ -450,7 +451,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"PatientOne@gmail.com\",\n    \"password\": \"PatientOne\"\n}",
+					"raw": "{\n    \"email\": \"AssistantOne@gmail.com\",\n    \"password\": \"AssistantOne\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -523,7 +524,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/dbproj/prescriptions/4",
+					"raw": "http://localhost:8080/dbproj/prescriptions/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -532,7 +533,7 @@
 					"path": [
 						"dbproj",
 						"prescriptions",
-						"4"
+						"1"
 					]
 				}
 			},
@@ -576,7 +577,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/dbproj/daily/2024-05-23",
+					"raw": "http://localhost:8080/dbproj/daily/2014-01-02",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -585,7 +586,7 @@
 					"path": [
 						"dbproj",
 						"daily",
-						"2024-05-23"
+						"2014-01-02"
 					]
 				}
 			},

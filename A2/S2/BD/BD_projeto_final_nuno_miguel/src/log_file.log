@@ -1,0 +1,201 @@
+INFO:logger:Checking if the database is set up
+INFO:logger:Starting HMS server on http://127.0.0.1:8080
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'PatientOne', 'nationality': 'German', 'phone': '840345315', 'birthday': '1980-01-01', 'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:46] "POST /dbproj/register/patient HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'DoctorTwo', 'nationality': 'Portuguese', 'phone': '201339326', 'birthday': '1980-01-01', 'email': 'DoctorTwo@gmail.com', 'password': 'DoctorTwo', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'university': 'Cambridge', 'graduation_date': '2005-01-01', 'specializations': ['Neurophysiology', 'Pediatric Neurology']}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:51] "POST /dbproj/register/doctor HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'John', 'nationality': 'German', 'phone': '670228977', 'birthday': '1980-01-01', 'email': 'nurse823@gmail.com', 'password': 'Password526', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'rank_id': '3'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:55] "POST /dbproj/register/nurse HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'Jane', 'nationality': 'Spanish', 'phone': '781252726', 'birthday': '1980-01-01', 'email': 'nurse730@gmail.com', 'password': 'Password104', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'rank_id': '2'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:55] "POST /dbproj/register/nurse HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'Megan', 'nationality': 'Portuguese', 'phone': '159750276', 'birthday': '1980-01-01', 'email': 'nurse965@gmail.com', 'password': 'Password508', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'rank_id': '3'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:56] "POST /dbproj/register/nurse HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'AssistantOne', 'nationality': 'Portuguese', 'phone': '312844419', 'birthday': '1980-01-01', 'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:54:58] "POST /dbproj/register/assistant HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:55:27] "[31m[1mPOST /dbproj/appointment HTTP/1.1[0m" 401 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 1, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:55:37] "PUT /dbproj/user HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:55:41] "POST /dbproj/appointment HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 6, role: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:55:52] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/1 - payload: {'patient_id': 1, 'doctor': 2, 'date': '2024-05-15T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:55:59] "POST /dbproj/surgery/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 1, 'doctor': 2, 'date': '2024-05-15T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:56:04] "POST /dbproj/surgery HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/1 - payload: {'patient_id': 1, 'doctor': 2, 'date': '2024-05-16T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:56:16] "POST /dbproj/surgery/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'DoctorOne@gmail.com', 'password': 'DoctorOne'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:56:34] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'DoctorTwo@gmail.com', 'password': 'DoctorTwo'}
+DEBUG:logger:POST /dbproj/user - user_id: 2, role: doctor
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:56:48] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'type': 'hospitalization', 'event_id': 1, 'validity': '2014-01-02', 'medicines': [{'medicine': 'Morphine', 'posology_dose': 123, 'posology_frequency': 'Morning'}, {'medicine': 'Morphine', 'posology_dose': 1234, 'posology_frequency': 'Afternoon'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:57:18] "POST /dbproj/prescription HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/1
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:57:27] "GET /dbproj/prescriptions/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'type': 'hospitalization', 'event_id': 1, 'validity': '2014-01-02', 'medicines': [{'medicine': 'Aspirin', 'posology_dose': 123, 'posology_frequency': 'Morning'}, {'medicine': 'Morphine', 'posology_dose': 1234, 'posology_frequency': 'Afternoon'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:57:39] "POST /dbproj/prescription HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/1
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:57:43] "GET /dbproj/prescriptions/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'type': 'hospitalization', 'event_id': 1, 'validity': '2024-05-15', 'medicines': [{'medicine': 'Aspirin', 'posology_dose': 123, 'posology_frequency': 'Morning'}, {'medicine': 'Morphine', 'posology_dose': 1234, 'posology_frequency': 'Afternoon'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:58:16] "POST /dbproj/prescription HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/2
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:34] "GET /dbproj/prescriptions/2 HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/21
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:39] "GET /dbproj/prescriptions/21 HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/21
+DEBUG:logger:GET /dbproj/prescriptions/21
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:39] "GET /dbproj/prescriptions/21 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:39] "GET /dbproj/prescriptions/21 HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/prescriptions/1
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:42] "GET /dbproj/prescriptions/1 HTTP/1.1" 200 -
+ERROR:logger:Insufficient permissions - required: patient, actual: doctor
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 12:59:58] "POST /dbproj/bills/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 1, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:00:10] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'PatientTwo', 'nationality': 'German', 'phone': '301992277', 'birthday': '1980-01-01', 'email': 'PatientTwo@gmail.com', 'password': 'PatientTwo'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:04:30] "POST /dbproj/register/patient HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientTwo@gmail.com', 'password': 'PatientTwo'}
+DEBUG:logger:POST /dbproj/user - user_id: 7, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:04:41] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'DoctorTwo', 'nationality': 'German', 'phone': '719363619', 'birthday': '1980-01-01', 'email': 'DoctorTwo@gmail.com', 'password': 'DoctorTwo', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'university': 'Harvard', 'graduation_date': '2005-01-01', 'specializations': ['Neurophysiology', 'Pediatric Neurology']}
+ERROR:logger:POST /dbproj/register/doctor - error: duplicate key value violates unique constraint "service_user_email_key"
+DETAIL:  Key (email)=(DoctorTwo@gmail.com) already exists.
+
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:04:52] "POST /dbproj/register/doctor HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'DoctorOne', 'nationality': 'German', 'phone': '925315443', 'birthday': '1980-01-01', 'email': 'DoctorOne@gmail.com', 'password': 'DoctorOne', 'contract_start_date': '2022-01-01', 'contract_end_date': '2023-01-01', 'university': 'Cambridge', 'graduation_date': '2005-01-01', 'specializations': ['Neurophysiology', 'Pediatric Neurology']}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:02] "POST /dbproj/register/doctor HTTP/1.1" 200 -
+ERROR:logger:POST /dbproj/appointment - error: Nurse is not available on the selected date
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:13] "POST /dbproj/appointment HTTP/1.1" 200 -
+ERROR:logger:POST /dbproj/appointment - error: Nurse is not available on the selected date
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:18] "POST /dbproj/appointment HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:25] "POST /dbproj/appointment HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/1 - payload: {'amount': 25, 'payment_method': 'MBWay'}
+ERROR:logger:POST /dbproj/dbproj/bills/1 - error: Bill does not belong to the patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:38] "POST /dbproj/bills/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/2 - payload: {'amount': 25, 'payment_method': 'MBWay'}
+ERROR:logger:POST /dbproj/dbproj/bills/2 - error: Bill does not belong to the patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:41] "POST /dbproj/bills/2 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/2 - payload: {'amount': 25, 'payment_method': 'MBWay'}
+ERROR:logger:POST /dbproj/dbproj/bills/2 - error: Bill does not belong to the patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:43] "POST /dbproj/bills/2 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/3 - payload: {'amount': 25, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:05:45] "POST /dbproj/bills/3 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:07:14] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'PatientThree', 'nationality': 'French', 'phone': '901232819', 'birthday': '1980-01-01', 'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:07:17] "POST /dbproj/register/patient HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+DEBUG:logger:POST /dbproj/user - user_id: 10, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:07:43] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+DEBUG:logger:POST /dbproj/user - user_id: 10, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:07:48] "PUT /dbproj/user HTTP/1.1" 200 -
+ERROR:logger:POST /dbproj/appointment - error: Doctor is not available on the selected date
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:07:57] "POST /dbproj/appointment HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:01] "POST /dbproj/appointment HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/4 - payload: {'amount': 15, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:17] "POST /dbproj/bills/4 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 1, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:22] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/1 - payload: {'amount': 11, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:32] "POST /dbproj/bills/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 6, role: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:37] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/top3
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:08:41] "GET /dbproj/top3 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 1, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:09:05] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/2 - payload: {'amount': 11, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:09:10] "POST /dbproj/bills/2 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 6, role: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:09:16] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/top3
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:09:18] "GET /dbproj/top3 HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/top3
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:09:24] "GET /dbproj/top3 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/1 - payload: {'patient_id': 1, 'doctor': 2, 'date': '2024-04-16T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:10:37] "POST /dbproj/surgery/1 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 1, 'doctor': 2, 'date': '2024-03-16T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:10:58] "POST /dbproj/surgery HTTP/1.1" 200 -
+ERROR:logger:Insufficient permissions - required: patient, actual: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:11:33] "POST /dbproj/bills/5 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientOne@gmail.com', 'password': 'PatientOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 1, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:11:40] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/5 - payload: {'amount': 121, 'payment_method': 'MBWay'}
+ERROR:logger:POST /dbproj/dbproj/bills/5 - error: new row for relation "bill" violates check constraint "excessive_payment"
+DETAIL:  Failing row contains (5, 100, 121).
+CONTEXT:  SQL statement "UPDATE bill
+    SET already_paid = bill.already_paid + NEW.amount
+    WHERE bill_id = NEW.bill_bill_id"
+PL/pgSQL function update_bill_payment_trigger() line 4 at SQL statement
+
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:11:45] "POST /dbproj/bills/5 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/5 - payload: {'amount': 21, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:11:51] "POST /dbproj/bills/5 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:12:07] "POST /dbproj/appointment HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/6 - payload: {'amount': 21, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:12:13] "POST /dbproj/bills/6 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 6, role: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:12:17] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/top3
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:12:20] "GET /dbproj/top3 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'PatientFour', 'nationality': 'Italian', 'phone': '559578220', 'birthday': '1980-01-01', 'email': 'PatientFour@gmail.com', 'password': 'PatientFour'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:14:11] "POST /dbproj/register/patient HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 11, 'doctor': 2, 'date': '2024-02-16T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:14:19] "POST /dbproj/surgery HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+DEBUG:logger:POST /dbproj/user - user_id: 10, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:14:45] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/7 - payload: {'amount': 100, 'payment_method': 'MBWay'}
+ERROR:logger:POST /dbproj/dbproj/bills/7 - error: Bill does not belong to the patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:14:56] "POST /dbproj/bills/7 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/register/service_user - payload: {'name': 'PatientFour', 'nationality': 'Portuguese', 'phone': '190408592', 'birthday': '1980-01-01', 'email': 'PatientFour@gmail.com', 'password': 'PatientFour'}
+ERROR:logger:POST /dbproj/register/patient - error: duplicate key value violates unique constraint "service_user_email_key"
+DETAIL:  Key (email)=(PatientFour@gmail.com) already exists.
+
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:15:21] "POST /dbproj/register/patient HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientThree@gmail.com', 'password': 'PatientThree'}
+DEBUG:logger:POST /dbproj/user - user_id: 10, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:15:41] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'PatientFour@gmail.com', 'password': 'PatientFour'}
+DEBUG:logger:POST /dbproj/user - user_id: 11, role: patient
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:00] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/dbproj/bills/7 - payload: {'amount': 100, 'payment_method': 'MBWay'}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:03] "POST /dbproj/bills/7 HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/user - payload: {'email': 'AssistantOne@gmail.com', 'password': 'AssistantOne'}
+DEBUG:logger:POST /dbproj/user - user_id: 6, role: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:10] "PUT /dbproj/user HTTP/1.1" 200 -
+DEBUG:logger:GET /dbproj/top3
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:13] "GET /dbproj/top3 HTTP/1.1" 200 -
+DEBUG:logger:GET /daily_summary/2014-01-02
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:30] "GET /dbproj/daily/2014-01-02 HTTP/1.1" 200 -
+DEBUG:logger:GET /daily_summary/2024-05-15
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:43] "GET /dbproj/daily/2024-05-15 HTTP/1.1" 200 -
+DEBUG:logger:GET /daily_summary/2024-05-27
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:16:49] "GET /dbproj/daily/2024-05-27 HTTP/1.1" 200 -
+DEBUG:logger:GET /report
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:17:06] "GET /dbproj/report HTTP/1.1" 200 -
+ERROR:logger:Insufficient permissions - required: patient, actual: assistant
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:17:39] "POST /dbproj/appointment HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 11, 'doctor': 9, 'date': '2024-02-16T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+ERROR:logger:POST /dbproj/surgery/None - error: Nurse is not available on the selected date
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:17:48] "POST /dbproj/surgery HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 11, 'doctor': 9, 'date': '2024-04-11T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:17:56] "POST /dbproj/surgery HTTP/1.1" 200 -
+DEBUG:logger:POST /dbproj/surgery/None - payload: {'patient_id': 11, 'doctor': 9, 'date': '2024-04-12T020:10:00Z', 'type': 'Ophthalmology', 'nurses': [{'nurse_id': '3', 'role': 'Euthanasist'}, {'nurse_id': '4', 'role': 'Preoperative'}]}
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:18:00] "POST /dbproj/surgery HTTP/1.1" 200 -
+DEBUG:logger:GET /report
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 13:18:05] "GET /dbproj/report HTTP/1.1" 200 -
