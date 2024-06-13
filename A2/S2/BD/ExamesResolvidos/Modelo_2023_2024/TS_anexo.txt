@@ -1,0 +1,67 @@
+4a)
+
+SELECT i.cod_prod, 
+SUM(case when extract('YEAR' from e.data_enc) = 2020 then quantidade else 0) as "Quantidade 2020",
+SUM(case when extract('YEAR' from e.data_enc) = 2019 then quantidade else 0) as "Quantidade 2019"
+FROM clientes as c JOIN encomendas as e ON c.cod_cliente = e.cod_cliente 
+JOIN itens as i ON e.num_enc = i.num_enc 
+WHERE c.localidade = 'Coimbra'
+GROUP BY i.cod_prod
+HAVING 
+    SUM(CASE WHEN EXTRACT(YEAR FROM e.data_enc) = 2020 THEN i.quantidade ELSE 0 END) > 
+    SUM(CASE WHEN EXTRACT(YEAR FROM e.data_enc) = 2019 THEN i.quantidade ELSE 0 END)
+ORDER BY i.cod_prod
+
+b)
+SELECT i.num_enc, e.data_enc, SUM(i.quantidade)
+FROM encomendas as e
+JOIN itens as i ON e.num_enc = i.num_enc 
+WHERE 
+EXTRACT('YEAR' from e.data_enc) = 2019 AND
+e.num_enc NOT IN (
+        SELECT DISTINCT i.num_enc 
+        FROM itens AS i
+        JOIN encomendas AS e ON i.num_enc = e.num_enc
+        WHERE EXTRACT(YEAR FROM e.data_enc) = 2020
+)
+GROUP BY i.cod_prod, e.data_enc
+HAVING 
+    SUM(i.quantidade) > (
+        SELECT AVG(total_quantidade)
+        FROM (
+            SELECT SUM(i.quantidade) AS total_quantidade
+            FROM encomendas AS e
+            JOIN itens AS i ON e.num_enc = i.num_enc
+            WHERE EXTRACT(YEAR FROM e.data_enc) = 2019
+            GROUP BY e.num_enc
+        ) AS media_2019
+    )
+ORDER BY i.cod_prod, e.data_enc
+
+5.
+CREATE OR REPLACE PROCEDURE add_bon()
+language plpgsql AS $$
+DECLARE
+	codeCliente clientes.code_cliente%type
+	c1 cursor for 
+		SELECT cod_cliente, SUM(quantidade*preco) as price
+		FROM clientes as c JOIN encomendas as e ON c.cod_cliente = e.cod_cliente 
+		JOIN itens as i ON e.num_enc = i.num_enc 
+		WHERE EXTRACT('YEAR' from data_enc) = 2020
+		GROUP BY cod_cliente
+		ORDER BY price DESC
+		LIMIT 3;
+BEGIN
+	OPEN c1;
+	loop
+		fetch c1 into codeCliente;
+		EXIT when NOT FOUND;
+		UPDATE clientes set saldo = saldo + 50 where code_cliente = codeCliente
+	end loop;
+	close C1;
+
+
+END;
+$$;
+	
+
