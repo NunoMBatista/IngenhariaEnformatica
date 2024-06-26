@@ -1,0 +1,146 @@
+Epoca Normal 2021/2022
+23 de julho 2022
+
+
+A1.-
+O algoritmo tem complexidade O(n*log2(n)). O algoritmo composto por dois nested loops, o externo que repete "n" vezes, e o interno que repete, no pior dos casos, "log2(n)" vezes. O loop interno corre enquanto "i" for maior do q 1, e a cada iteração divide-se por 2, resultando numa complexidade O(n)*O(log2(n)) = O(n*log2(n)).
+
+
+
+
+A2.-
+	Pergunta inventada.
+	(Era preciso ir à sessão "Técnicas de Desenho de Algoritmos", que não existe)
+
+
+
+
+B1-
+[X]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+
+
+
+
+B2.-
+	(NAO ME APETECE PASSAR PARA PC, CONSULTAR A RESPOSTA DO NUNO, DEU-ME O MESMO)
+
+
+
+B3.-
+  B3.1.- Desadequado. Como esta tabela de capacidade 1000 vai ser usada para guardar 900 elementos, vai ficar com uma carga de 90%. Considera-se que a carga limite máxima aceitável é 50%, pois mais originar demasiadas colisões, resultando numa pior eficiencia na insersão, remoções e consultas, no pior caso resultando numa procura de complexidade O(n).
+  
+  B3.2.- Desadequado. 0 <= k%900 <= 899  <=>  100 <= k%900+100 <= 999		Como podemos ver, os primeiros 99 e ultimo numero não são utilizados, desperdicio
+
+
+
+
+C1.-  Selection Sort, pois o ShellSort tem como objetivo ordenar parcialmente uma sequancia, e o Selection Sort tende para complexidade O(n) quando mais organizada está o array an inicio.
+
+
+
+C2.-
+  C2.1.-
+	RESPOSTA CERTA:
+		outra: O(d*n), d=numero de bits necessários para representar o maior número
+		Radix Sort, como é um algoritmo de sort nao comparativo, consegue ter uma complexidade menor que O(n*log(n)), aproveitando-se das propriedades da representação de um número em binário, organizando-os começando pelo dígito (ou bit) menos significativo.
+	
+	RESPOSTA QUE O STOR QUER:
+		O(n*log2(n))
+		k=logb(d), b=base(2) e d=numero de bits necessários para representar o maior número
+		Caso d tenda para n (quase nunca tende), então k=log2(n), resultando num Radix Sort com O(n*log2(n))
+
+  C2.2.-
+	inicial:
+	234587
+	104502
+	144587
+	004587
+	104593
+	
+	1045[02]
+	2345[87]
+	1445[87]
+	0045[87]
+	1045[93]
+	
+	
+	10[45]02
+	23[45]87
+	14[45]87
+	00[45]87
+	10[45]93
+	
+	
+	[00]4587
+	[10]4502
+	[10]4593
+	[14]4587
+	[23]4587
+	
+	
+	final:
+	004587
+	104502
+	104593
+	144587
+	234587
+
+  C2.3.-
+	ANA ALVES
+	RUI JOSE
+	TO XICO
+	ZE TO
+	TITA RUCA
+	
+	(vamos assumir q n há espaços)
+	ANAALVES
+	RUIJOSE
+	TOXICO
+	ZETO
+	TITARUCA
+	
+	
+	[A]NAALVES
+	[R]UIJOSE
+	[T]OXICO     } partição T
+	[T]ITARUCA   }
+	[Z]ETO
+	
+	
+	A[N]AALVES
+	R[U]IJOSE
+	T[I]TARUCA   } partição T
+	T[O]XICO     }
+	Z[E]TO
+
+
+
+
+C3.-
+  C3.1.-
+  C3.2.-
+	
+        8      2           2           2           1           1
+	   ───┬───────────┬───────────┬───────────┬───────────┬───  1
+	      │T1         │T3         │T5         │T7         │T9
+	2     │8     8    │8     6    │6     1    │2     2    │2
+	   ───┴─────┬─────┴─────┬─────┴─────┬─────┴─────┬─────┴───  2
+                    │T2         │T4         │T6         │T8
+        9           │9     6    │8     1    │6     6    │6
+	   ─────────┴─────┬─────┴─────┬─────┴─────┬─────┴─────────  6
+	                  │T3         │T5         │T7
+	6                 │9     1    │8     7    │7
+	   ───────────────┴─────┬─────┴─────┬─────┴───────────────  7
+	                        │T4         │T6
+	1                       │9     7    │8
+	   ─────────────────────┴─────┬─────┴─────────────────────  8
+	                              │T5
+	7                             │9
+	   ───────────────────────────┴───────────────────────────  9
