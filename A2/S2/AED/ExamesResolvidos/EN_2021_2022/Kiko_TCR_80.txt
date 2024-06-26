@@ -1,0 +1,136 @@
+Epoca Normal 2021/2022
+23 de julho 2022
+
+
+
+A1.-
+Bloco A:	O(n*log2(n))	O ciclo externo corre n vezes, e o interno corre, no pior dos casos, log2(n) vezes. Como os loops estão nested, multiplicamos as complexidades.
+Bloco B:	O(n*log2(n))	O ciclo externo corre n vezes, e o interno corre, no pior dos casos, log2(n) vezes. O pior caso, é quando n=16, em qualquer outro caso (assumindo n>0) a complexida é menor.
+Bloco C:	O(n²)		O ciclo "while" itera por cada elemento da lista (O(n)), e a cada iteração aplica a função "move_left" que tem complexidade O(n).
+
+
+
+
+A2.-
+[ ]	o objetivo da Programação Dinamica (DP) é chegar à solução mais rapidamente.
+[X]	Se pensares bem na coisa, DP tem como objetivo encontrar soluções sem recorrer à recursão, logo gera uma menor árvore de recusão, se tudo correr bem, uma arvore não existente
+[X]	Para realizar a memoization que caracteriza a DP é necessário memória adicional (uma matrix de dimensão n, n->numero de vars a memoizar)
+[X]	} (mesma pergunta, mesma resposta) 
+[X]	} recursivo=mau e iterativo=bom e DP=optimizar soluções recursivas  =>  DP=(ñ recursivo + iterativo)
+
+
+
+
+B1.-
+Prop#1: A arvore e as suas subtrees estão sempre equilibradas, de modo a que a diferença de profundidade entre duas subtrees é no maximo 1, resultando numa altura máxima de log2(n).
+Prop#2: É uma árvore binária de pesquisa, portanto os números à direita são sempre maiores do que os da esquerda
+Prop#3: A arvore equilibra-se a si mesma quando um node é introduzido, sendo que este processo tem complexidade O(log2(n))
+
+
+
+
+B2.-
+──20P
+
+
+──20P
+  └─10V
+
+
+  ┌─20V
+──10P
+  └─5V
+
+
+  ┌─20P
+──10P
+  └─5P
+    └─3V
+
+
+  ┌─20P
+──10P
+  │ ┌─7V
+  └─5P
+    └─3V
+
+
+  ┌─20P
+──10P
+  │ ┌─7P
+  └─5V
+    │ ┌─4V
+    └─3P
+      └─1V
+
+
+    ┌─20P
+  ┌─10V
+  │ └─7P
+──5P
+  │ ┌─4P
+  └─3V
+    │ ┌─2V
+    └─1P
+
+
+
+
+B3.-
+Nenhum dos anteriores (61)
+(ver https://www.youtube.com/watch?v=K1a2Bk8NrYQ&ab_channel=SpanningTree)
+
+    size_bloco = (b-1)*size_no + b*size_refer <=>
+<=> 4096 = (b-1)*64 + b*4 <=>
+<=> 4096 = b*64-64 + b*4 <=>
+<=> 4160 = 68*b <=>
+<=> p = 61.176 = 61
+
+
+
+
+C1.-
+	O stor esqueceu-se de meter os valores no exame da epoca normal de 2021/22, como tal o problema é impossível. À falta destes, usaremos os valores de um exercício da segunda ficha dada na aula:
+	
+	Array:             [ 2,  8, 16,  1,  3, 10, 11, 12]
+	
+	Heap Tree inicial: [16, 12, 11,  8,  3, 10,  2,  1]
+	1º elem ordenado:  [12,  8, 11,  1,  3, 10,  2| 16]	<- (barra '|' delimita a parte já ordenada)
+	2º elem ordenado:  [11,  8, 10,  1,  3,  2| 12, 16]
+	3º elem ordenado:  [10,  8,  2,  1,  3| 11, 12, 16]
+	4º elem ordenado:  [ 8,  3,  2,  1| 10, 11, 12, 16]
+	
+	
+
+
+C2.-
+Nao
+
+Radix sort tem complexidade temporal no pior caso O(k*n). Este sort funciona comparando os algarismos dos números, do menos para o mais significativo. Este algoritmo consegue ter uma complexidade menor do que O(n*log2(n)) pois não é um sort comparativo.
+
+
+
+
+C3.-
+  C3.1.-
+        50     10          5           5           5           1
+	   ───┬───────────┬───────────┬───────────┬───────────┬───  1
+	      │           │           │           │           │
+	10    │50    5    │10    10   │10    6    │6     1    │5
+	   ───┴─────┬─────┴─────┬─────┴─────┬─────┴─────┬─────┴───  5
+                    │           │           │           │
+        5           │50    50   │50    6    │10    1    │6
+	   ─────────┴─────┬─────┴─────┬─────┴─────┬─────┴─────────  6
+	                  │           │           │
+	80                │80    6    │50    1    │10
+	   ───────────────┴─────┬─────┴─────┬─────┴───────────────  10
+	                        │           │
+	6                       │80    1    │50
+	   ─────────────────────┴─────┬─────┴─────────────────────  50
+	                              │
+	1                             │80
+	   ───────────────────────────┴───────────────────────────  80
+  C4.1.-   Bubble sort (dá para ver q os valores mais altos dão bubble para cima)
+
+
+
