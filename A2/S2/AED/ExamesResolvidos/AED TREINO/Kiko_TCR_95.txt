@@ -1,0 +1,118 @@
+Exame de Treino
+
+
+
+A1.-
+	(Nao entendo o enunciado)
+
+
+
+
+B1.-
+	-> Todos os nós são ou Pretos ou Vermelhos.
+	-> A root é sempre Preta.
+	-> Um node Vermelho não pode ter filhos Vermelhos.
+	-> Os nós null são considerados Pretos.
+	-> E o número de nós Pretos entre qualquer nó e os seus descendentes nulls é igual.
+
+
+
+
+B2.-
+	(dá trabalho fazer a PC, consultar TS.pdf)
+
+
+
+
+B3.-
+
+21 10 32 18 19 20 29
+
+00 10
+01 
+02 
+03 32
+04 
+05 29
+06 
+07 18
+08 19
+09 20
+10 21
+
+h(k) = k%11
+hi(k) = (h(k)+i²)%11
+
+
+h(21) = 21%11 = 10
+
+h(10) = 10%11 = 10
+h1(10) = (10+1²)%11 = 11%11 = 0
+
+h(32) = 32%11 = 10
+h1(32) = (10+1²)%11 = 11%11 = 0
+h2(32) = (10+2²)%11 = 14%11 = 3
+
+h(18) = 18%11 = 7
+
+h(19) = 19%11 = 8
+
+h(20) = 20%11 = 9
+
+h(29) = 29%11 = 7
+h1(29) = (7+1²)%11 = 8%11 = 8
+h2(29) = (7+2²)%11 = 11%11 = 0
+h3(29) = (7+3²)%11 = 16%11 = 5
+
+
+
+
+C1.-
+	array inicial:    [ 2,  8, 16,  1,  3, 10, 11, 12]
+	HeapTree inicial: [ 1,  2, 10,  8,  3, 16, 11, 12]
+	1º elem orden:    [ 2,  3, 10,  8, 12, 16, 11|  1]
+	2º elem orden:    [ 3,  8, 10, 11, 12, 16|  2,  1]
+	3º elem orden:    [ 8, 11, 10, 16, 12|  3,  2,  1]
+	4º elem orden:    [10, 11, 12, 16|  8,  3,  2,  1]
+
+
+
+
+C2.-
+	(pergunta inventada)
+	sim, quando por acaso k=log2(n), o que é improvável e insignificante.
+
+
+
+
+C3.-
+  C3.1.-   
+	0      0
+	   ───┬─────────────────────  0
+	      │
+	1     │      0
+	   ───┼─────┬───────────────  0
+              │     │
+        1     │     │      0
+	   ───┼─────┼─────┬─────────  0
+	      │     │     │
+	1     │     │     │      0
+	   ───┼─────┼─────┼─────┬───  0
+	      │     │     │     │
+	0     │0    │     │     │
+	   ───┴─────┼─────┼─────┼───  0
+	            │     │     │
+	0           │1    │     │
+	   ─────────┴─────┼─────┼───  1
+                          │     │
+        0                 │1    │
+	   ───────────────┴─────┼───  1
+	                        │
+	0                       │1
+	   ─────────────────────┴───  1
+
+
+
+
+  C3.2.-
+	ShellSort, pois apenas dá partialsort, por exemplo, para a string 00110001 que resulta em 00010011
