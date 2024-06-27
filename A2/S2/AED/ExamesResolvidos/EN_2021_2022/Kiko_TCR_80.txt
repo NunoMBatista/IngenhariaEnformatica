@@ -106,7 +106,7 @@ C1.-
 C2.-
 Nao
 
-Radix sort tem complexidade temporal no pior caso O(k*n). Este sort funciona comparando os algarismos dos números, do menos para o mais significativo. Este algoritmo consegue ter uma complexidade menor do que O(n*log2(n)) pois não é um sort comparativo.
+Radix sort tem complexidade temporal no pior caso O(k*n). Este sort funciona comparando os algarismos dos números, do menos para o mais significativo. Este algoritmo consegue ter uma complexidade menor do que O(n*log2(n)) pois não é um sort comparativo. No entanto, é possível tecnicamente ter complexidade temporal O(n*log(n)), se por acaso k=log(n). Isto é irrelevante, improvável, e insignificante.
 
 
 
