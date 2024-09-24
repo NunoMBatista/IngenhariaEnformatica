@@ -1,0 +1,83 @@
+[ Este enunciado é uma recriação do enunciado dado na Epoca Normal de 2024, copiado para uma folha de rascunho nos ultimos 10minutos da prova ]
+[ Quase todas as perguntas estão passadas verbatim, no entanto, como o enunciado foi passado um bocado à pressa, os enunciados do ex C estão abreviados. Em caso de dúvidas, conferir as fotografias da versão original em "ENUNCIADO-copiado.pdf". ]
+[ RadixSort NAO é O(log(n)) ]
+
+
+(Xp)	-> X: numero de pontos da pergunta (100p no total)
+(Xll)	-> X: numero de linhas para escrever a resposta
+
+
+
+
+(10p) A.1. - Indique a complexidade temporal Big-O, explique sucintamente. (4ll)
+	
+	k=0;
+	for (j=1, j<=n; j++) {
+		for (i=n; i>1; i=i/2) {
+			k++
+		}
+	}
+
+
+
+
+(10p) A.2. - É possível ter um programa de complexidade O(n) a demorar mais tempo que um de complexidade O(n³).
+	a)	[ ] SIM		[ ] NãO
+	
+	b) Justifique a resposta recorrendo à definição de O-grande. (5ll)
+
+
+
+
+(10p) B.1. - Considere a Árvore Binária abaixo. Mostre o resultado de eliminar as seguinte chaves pela ordem apresentada.
+	...
+
+
+
+
+(10p) B.2. - Considere uma árvore VP. Indique as propriedades a que obedece uma árvore deste tipo (o número de propriedades [linhas] indicado abaixo é maior ou igual ao necessário)
+	(7ll) -> 7 propriedades
+
+
+
+
+(10p) B.3. - Considere a seguinte árvore B de ordem 4. Mostre o resultado de acrescentar as seguintes chaves pela ordem apresentada
+	
+	|| 15 || 80 || 90 ||
+	
+	inserir 60, 61, 65:
+	
+	inserir 62, 63:
+	
+	inserir 82, 83:
+
+
+
+
+(10p) B.4. - Considere o espaço de memória abaixo. Crie uma tabela de dispersão que utilize todo o espaço disponível. Use no processo de dispersão uma função de enterlaçamento que usa segmentos de quatro algarismos a partir das unidades fazendo de seguida a adição destes segmentos e usando depois o resto da divisão inteira no resultado. Escolha a divisão adquada.
+A função de dispersão será LINEAR PROBING. Mostre o resultado da inserção.
+
+91890323
+2
+4613
+6649873263
+99
+10823497677
+
+
+
+
+(10p) C.1. - Ordenamento por ordem decrescente HeapSort. [SÓ Heapify]
+	[210, 130, 40, 500, 6, 7, 8, 9]
+
+
+
+(10p) C.2. - Ordene a partir da Heap Tree anterior. Mostre todos os passos. Não é preciso mostrar a estrutura linear da memória.
+
+
+
+(10p) C.3. - Radix MSD, evidencia os Buckets, ordem lexicográfica
+	[ABC, AXC, VAO, TXT, ACC, VIU, ABX, VIA, ACW]
+
+
+(10p) C.4. - vantagens e desvantagens de usar bases maiores (ex 1000 vs 10) no RADIX LSD (5ll)
