@@ -1,0 +1,55 @@
+(1)
+OCT: Sequência de dígitos octais começada por 0 e com pelo menos um digito para além de 0
+DEC: Sequência de dígitos decimais começada, interrompida, mas não terminada por um .
+STR: Sequência alfanumérica não vazia entre "
+
+a) Regex e NFA de cada classe lexical
+b) DFA para distinção de classes
+c) Tokens lidas na string: 0"a"00"b"00.48.7"5.40"
+
+
+(2)
+
+P -> F P
+  |  V P
+  |  ε
+F -> id ()
+V -> id var
+
+a) Apresenta uma sequência com pelo menos 10 caracteres da linguagem descrita pela gramática e mostra a respetiva árvore de derivação
+b) Prova que esta gramática não é LL(1)
+c) Apresenta uma gramática LL(1) para a mesma linguagem e apresenta a parse table
+
+
+(3)
+
+Start -> E $
+E     -> E + E
+      |  - E
+      | id
+
+a) Apresenta o DFA LR(1)
+b) Apresenta a respetiva parse table (resolvendo shift-reduce conflicts para que + seja associativo à esquerda e - tenha prioridade)
+c) Faz um SDT para a construção da AST durante a fase ascendente do parsing (convenções: addchild(parent, child) e newnode(category, token))
+
+
+(4)
+
+double sqrt(double x){
+    err = 1e-6;
+    div = 2;
+    try = x;
+
+    while(1){
+        double next = (try / div) + (x/try/div);
+        if((next - try < err) && (try - next < err))
+            break;
+        try = next;
+    }
+
+    return try;
+}
+
+a) Tradução para C3E
+b) Número mínimo de registos para avaliar a expressão da linha "double next = (try/div) + (x/try/div)"
+c) O que deve estar nos registos de ativação
