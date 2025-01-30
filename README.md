@@ -1,3 +1,1 @@
-# CabeçaDeRecursos
-
-9+10
+Recursos de estudo
