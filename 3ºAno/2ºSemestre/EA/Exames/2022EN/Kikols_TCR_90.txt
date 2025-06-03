@@ -1,0 +1,149 @@
+1.-
+1.a.-
+
+Vertices:  1  ,  3  ,  8  ,  6  ,  2  ,  5  ,  7  ,  4
+Distance:  0  ,  1  ,  4  ,  5  ,  7  ,  8  ,  9  ,  10
+(The vertices were visited in the order that they appear)
+
+1.b.-
+Changing v3-v4 to -11 would change the change the shortest paths found.
+No, you would not be able to use Djikstra, because it only works when the vertices are non-negative.
+This happens because dealing with negative weights requires taking several passes thru the graph, and Djikstra does not do that.
+
+
+
+
+2.-
+...
+
+
+
+
+
+3.-
+3.a.-
+    [C++]
+
+// initialize global variable
+vector<vector<int>> dp = vector<vector<int>>( m+1, vector<int>(c+1, -1))
+
+// Top down recursive algo
+int M(int i, int j, &vector<int>v) {
+
+    // Base cases
+    if ( i<=0 || j<=0 ) {
+        return 0;
+    }
+
+    // check if dp already has result cached (is diff than -1)
+    if ( dp[i][j]!=-1 ) {
+        return dp[i][j];
+    }
+
+    // if not cached, calculate it, to cache it in the future
+    int result = -1;
+    for (int u : *v) {
+        result = max(result, u+M(i-u, j-1, v));
+    }
+    dp[i][j] = result;
+
+    // return result
+    return dp[i][j];
+}
+
+// how to call recursive function (pass v as a pointer to conserve space)
+int main() {
+    cout << M(m,c,&v) << endl;
+}
+
+
+
+
+3.b.-
+    [C++]
+
+// initialize global variable
+vector<vector<int>> dp = vector<vector<int>>( m+1, vector<int>(c+1, -1))
+
+// Bottom up algo
+int M(int m, int c, &vector<int>v) {
+    for (int i=0; i<m; i++) {
+        for (int j=0; i<c; j++) {
+            for (int u : *v) {
+                if (i-u<=0 || j-1<=0) {
+                    continue;
+                }
+                dp[i][j] = max(dp[i][j], u+dp[i-u][j-1]);
+            }
+        }
+    }
+}
+
+// how to call recursive function (pass v as a pointer to conserve space)
+int main() {
+    cout << M(m,c,&v) << endl;
+}
+
+
+
+
+
+
+4.-
+    [C++]
+
+// Function that returns the value at each square
+int M(i, j) {
+    ...
+}
+
+
+// Function that counts the number of islands using floodfill
+int island_count(int n) {
+    int count = 0;
+
+    // create matrix to track visited (must be the same size of map matrix)
+    vector<vector<bool>> visited = vector<vector<int>>(n, vector<bool>(n, false));
+
+    // for every square
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<n; j++) {
+
+            // If not visited yet, and is land, apply floodfill to visit all squares that belong to that island
+            if (!visited[i][j] && M(i,j)) {
+                floodfill(i, j, &visited);
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+
+// floodfill recursive function
+void floodfill(int i, int j, &vector<vector<false>> visited) {
+    // make sure that it's land, and is not yet visited
+    if (!M(i,j) || visited[i][j] ) {
+        return;
+    }
+
+    // mark as visited
+    visited[i][j] = true;
+
+    // visit the 2 neighbouring cells that are below and to the right
+    // do not visit the ones up and left, because if they were not visited yet, they cannot be land
+    floodfill(i+1, j, visited);
+    floodfill(i, j+1, visited);
+}
+
+
+
+[Explanation and complexity]
+
+The algorithm iterates every cell. When it finds land that it has not yet visited adds one to the island count and applies floodfill on the cell.
+The floodfill will visit all neighbouring cells that are land and have not yet been visited, marking them as visited as it goes.
+This makes sure that no piece of land is counted more than once, while also not counting pieces of land of the same island as seperate islands.
+
+The time complexity of this approach is O(n²), with "n" being the width/height of the matrix.
+This is because every cell is visited once and only once.
