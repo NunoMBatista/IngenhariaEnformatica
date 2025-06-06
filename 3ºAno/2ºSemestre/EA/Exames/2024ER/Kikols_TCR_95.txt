@@ -1,0 +1,88 @@
+1.-
+
+    [C++]
+
+int P(int n, int k) {
+    if (k==1 || n==1 || k==n) {
+        return 1;
+    }
+    return P(n-1, k-1) + P(n-1, k);
+}
+
+void Pascal(int size) {
+    for (int n=1; n<=size; n++) {
+        for (int k=1; k<=n; k++) {
+            cout << P(n, k) << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+
+int main() {
+    Pascal(5);
+}
+
+
+
+
+
+2.-
+2.a.-
+    [VER "Nuno.pdf", a solução dele está bem]
+2.b.-
+    [VER "TiagoSilva.pdf", a solução dele está bem]
+
+
+
+
+
+3.-
+    [VER "Nuno.pdf" ou "TiagoSilva.pdf", ambas as soluções estão bem]
+
+
+
+
+
+
+4.-
+    [C++]
+int D(vector<int> d, int i, int j) {
+    vector<vector<int>> dp = vector<vector<int>>(i+1, vector<int>(j+1, -1));
+
+    for (int a=0; a<=i; a++) {
+        dp[a][0] = 0;
+    }
+    for (int b=0; b<=j; b++) {
+        dp[0][b] = 0;
+    }
+
+    for (int a=1; a<=i; a++) {
+        for (int b=1; b<=j; b++) {
+            dp[a][b] = INT_MAX;
+            if (i-1>0) {
+                dp[a][b] = min(dp[a][b], dp[a-1][b]);
+            }
+            if (j-1>0) {
+                dp[a][b] = min(dp[a][b], dp[a][b-1]);
+            }
+            if ((j-1>0) && (i-1>0)) {
+                dp[a][b] = min(dp[a][b], dp[a-1][b-1]);                
+            }
+            dp[a][b] += d[a];
+        }
+    }
+    return dp[i][j];
+}
+
+
+int main() {
+    cout << D({-1, 1,2,3,4}, 4, 4) << endl;
+}
+
+
+[Explanation and Complexity]
+The temporal complexity is O(n²), given that the function has n² states (as seen in the dp, that is a matrix of size n*n).
+Because the size needed for the dp matrix, the space complexity is also O(n²).
+[This implementation has been tested in C++ and worked]
