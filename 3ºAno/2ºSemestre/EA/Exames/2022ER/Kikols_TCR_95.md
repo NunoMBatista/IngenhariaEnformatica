@@ -49,7 +49,7 @@ Deste modo, cada vez que um fib(n) é calculado, é guardado no vetor dp atravé
 **4.-**
 
 Pseudo-code:
-``` [PSEUDO-CODE]
+``` pseudo-code
 Function exaustiveSearch(idx, triplet_sums[3], S, n):
     if idx == n:
         if todos os triplet_sums são iguais then
@@ -73,7 +73,7 @@ Function triplets(S):
 
 
 C++:
-``` [C++]
+``` c++
 bool exaustiveSearch(int idx, int triplet_sums[3], vector<int> &S, int n) {
     if (idx==n) {
         if (triplet_sums[0]==triplet_sums[1] && triplet_sums[1]==triplet_sums[2]) {
