@@ -131,10 +131,11 @@ void floodfill(int i, int j, &vector<vector<false>> visited) {
     // mark as visited
     visited[i][j] = true;
 
-    // visit the 2 neighbouring cells that are below and to the right
-    // do not visit the ones up and left, because if they were not visited yet, they cannot be land
+    // visit the 4 neighbouring cells
     floodfill(i+1, j, visited);
+    floodfill(i-1, j, visited);
     floodfill(i, j+1, visited);
+    floodfill(i, j-1, visited);
 }
 
 
