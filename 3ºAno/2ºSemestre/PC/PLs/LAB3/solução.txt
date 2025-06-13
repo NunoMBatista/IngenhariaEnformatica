@@ -1,0 +1,301 @@
+Ficha 3: Introdução ao Encaminhamento
+**Objetivos e Tópicos Abordados:**Esta ficha foca-se nas questões de encaminhamento em redes IP, usando encaminhadores Cisco como base, mas abordando conceitos independentes de fabricantes [36]. Os tópicos incluem encaminhamento estático, encaminhamento dinâmico, tipos de protocolos de encaminhamento e o Protocolo RIP [37].
+Conceitos Chave de Encaminhamento:
+
+Encaminhamento (Routing) é uma função da camada de rede (camada 3 do modelo OSI) responsável por determinar os caminhos que os pacotes IP devem percorrer da origem ao destino [36].
+
+Routers utilizam tabelas de encaminhamento para determinar o próximo salto [38].
+
+As rotas podem ser definidas estaticamente (calculadas off-line e inseridas manualmente) ou dinamicamente (calculadas pelos routers com base em informações trocadas via protocolos de encaminhamento) [38].
+
+Encaminhamento Estático: Viável apenas em redes pequenas com uma única ligação ao exterior e poucas alterações de topologia [39].
+
+Encaminhamento Dinâmico: Essencial em redes de grande dimensão e topologias complexas, onde as alterações são frequentes [40]. Utiliza protocolos de encaminhamento que veiculam informação sobre a topologia e estado da rede [40].
+
+A Internet é organizada em Sistemas Autónomos (AS) [41].
+◦
+Protocolos de Encaminhamento Interior (IGP): Usados dentro de um AS (ex: RIP, OSPF) [41].
+◦
+Protocolos de Encaminhamento Exterior (EGP): Usados entre ASs (ex: BGP) [41].
+
+RIP (Routing Information Protocol) - Versão 2:
+◦
+É um protocolo simples do tipo distance-vector [41, 42].
+◦
+Transporta um vetor de distâncias (destino atingível, número de saltos, próximo router) [42].
+◦
+Pacotes RIP são enviados periodicamente aos vizinhos [42].
+◦
+Limitações: Métrica simplista (apenas número de saltos, sem considerar largura de banda ou erros) [42]. Limitado a 15 saltos (16 significa inatingível) [42]. RIPv1 não suporta máscaras de sub-rede e não autentica pacotes; RIPv2 suporta máscaras de sub-rede e autenticação [42].
+◦
+A configuração do RIP Cisco utiliza router rip, version 2, network <endereço_rede>, e passive-interface <interface> para evitar envio de pacotes RIP desnecessários [43].
+
+Distância Administrativa: Um parâmetro específico da Cisco que reflete o grau de confiança na forma como a rota foi criada (valor menor = maior confiança) [44]. A rota estática tem distância administrativa de 1, enquanto RIP tem 120 [45].
+--------------------------------------------------------------------------------
+Resolução dos Exercícios da Ficha 3 (Baseado em "Ficha 3.pdf" e "PL03.pdf"):
+Passos Básicos Gerais de Configuração:
+1.
+Os mesmos passos iniciais de ligação e configuração do Hyperterminal [46].
+2.
+Ligar o Router: Ethernet – espaço de cima; Fast Ethernet – espaço de baixo (conforme o modelo) [46].
+Exercício 1: Plano de Ligações e Endereçamento
+
+Objetivo: Elaborar o plano de ligações e endereçamento para o cenário da Figura 3 [47], identificando interfaces, endereços IP para routers e hosts A e B, usando as gamas de endereços privados indicadas [47].
+
+(Este exercício é de planeamento e não envolve comandos de configuração direta na "PL03.pdf").
+Exercício 2: Constituição do Cenário e Verificação Inicial de Conectividade
+
+Objetivo: Montar o cenário, configurar as interfaces com os endereços do plano, sem configurar rotas. Verificar a conectividade a partir do Host A para as interfaces dos routers usando ping [48, 49]. Observar as tabelas de encaminhamento (show ip route) e interpretar as falhas de ping [50].
+
+Configuração do Router 1 (R1 - Cisco 1700/1841):
+◦
+R1> enable [51]
+◦
+R1# config t [51]
+◦
+R1(config)# int e0 (Interface 1) [51]
+◦
+R1(config-if)# ip address 192.168.<X+1>.1 255.255.255.0 [51]
+◦
+R1(config-if)# no shut [51]
+◦
+R1(config-if)# exit [51]
+◦
+R1(config)# int f0 (Interface 2) [51]
+◦
+R1(config-if)# ip address 192.168.<X+2>.1 255.255.255.0 [51]
+◦
+R1(config-if)# no shut [51]
+◦
+R1(config-if)# end [51]
+
+Configuração do Router 2 (R2 - Cisco C1101-4P):
+◦
+R2> enable [51]
+◦
+R2# config t [51]
+◦
+R2(config)# int g0/0/0 (Interface 1) [52]
+◦
+R2(config-if)# ip address 192.168.<X+2>.2 255.255.255.0 [52]
+◦
+R2(config-if)# no shut [52]
+◦
+R2(config-if)# exit [52]
+◦
+R2(config)# int g0/1/0 (Interface 4, associada à VLAN 10) [52]
+◦
+R2(config-if)# switchport mode access [52]
+◦
+R2(config-if)# switchport access vlan 10 [52]
+◦
+R2(config-if)# no shut [52]
+◦
+R2(config-if)# exit [52]
+◦
+R2(config)# int vlan 10 [52]
+◦
+R2(config-if)# ip address 192.168.<X+5>.2 255.255.255.0 [52]
+◦
+R2(config-if)# no shut [52]
+◦
+R2(config-if)# exit [52]
+◦
+R2(config)# int g0/1/1 (Interface 2, associada à VLAN 20) [52]
+◦
+R2(config-if)# switchport mode access [52]
+◦
+R2(config-if)# switchport access vlan 20 [52]
+◦
+R2(config-if)# no shut [53]
+◦
+R2(config-if)# exit [53]
+◦
+R2(config)# int vlan 20 [53]
+◦
+R2(config-if)# ip address 192.168.<X+4>.2 255.255.255.0 [53]
+◦
+R2(config-if)# no shut [53]
+◦
+R2(config-if)# exit [53]
+◦
+R2(config)# int g0/1/2 (Interface 3, associada à VLAN 30) [53]
+◦
+R2(config-if)# switchport mode access [53]
+◦
+R2(config-if)# switchport access vlan 30 [53]
+◦
+R2(config-if)# no shut [53]
+◦
+R2(config-if)# exit [53]
+◦
+R2(config)# int vlan 30 [53]
+◦
+R2(config-if)# ip address 192.168.<X+3>.2 255.255.255.0 [53]
+◦
+R2(config-if)# no shut [53]
+◦
+R2(config-if)# end [53]
+
+Configuração do Router 3 (R3 - Cisco 1700/1841):
+◦
+R3> enable [53]
+◦
+R3# config t [53]
+◦
+R3(config)# int e0 (Interface 2) [53]
+◦
+R3(config-if)# ip address 192.168.<X+4>.3 255.255.255.0 [54]
+◦
+R3(config-if)# no shut [54]
+◦
+R3(config-if)# exit [54]
+◦
+R3(config)# int f0 (Interface 1) [54]
+◦
+R3(config-if)# ip address 192.168.<X+5>.3 255.255.255.0 [54]
+◦
+R3(config-if)# no shut [54]
+◦
+R3(config-if)# end [54]
+
+Configuração do Host A:
+◦
+Configurar o PC com IP address: 192.168.<X+1>.254, Subnet mask: 255.255.255.0, Default gateway: 192.168.<X+1>.1 [54].
+◦
+Realizar pings para as interfaces dos routers e para o Host B [55].
+
+Configuração do Host B:
+◦
+Configurar o PC com IP address: 192.168.<X+3>.254, Subnet mask: 255.255.255.0, Default gateway: 192.168.<X+3>.2 [56].
+◦
+Realizar pings para as interfaces dos routers e para o Host A [56, 57].
+
+Verificação:
+◦
+R1# show ip route em cada router para verificar a tabela de encaminhamento [50].
+Exercício 3: Constituição de Rotas Estáticas
+
+Objetivo: Introduzir rotas estáticas nos routers R1, R2 e R3 para que cada um saiba como atingir qualquer rede [44]. Por exemplo, no R1, rotas para 192.168.(X+3).0, 192.168.(X+4).0 e 192.168.(X+5).0 usando o IP da interface 1 do R2 como próximo salto [45].
+
+Rotas Estáticas em R1:
+◦
+R1# config t [57]
+◦
+R1(config)# ip route 192.168.<X+3>.0 255.255.255.0 192.168.<X+2>.2 [57]
+◦
+R1(config)# ip route 192.168.<X+4>.0 255.255.255.0 192.168.<X+2>.2 [57]
+◦
+R1(config)# ip route 192.168.<X+5>.0 255.255.255.0 192.168.<X+2>.2 [57]
+
+Rotas Estáticas em R2:
+◦
+R2# config t [58]
+◦
+R2(config)# ip route 192.168.<X+1>.0 255.255.255.0 192.168.<X+2>.1 [58]
+
+Rotas Estáticas em R3:
+◦
+R3# config t [58]
+◦
+R3(config)# ip route 192.168.<X+1>.0 255.255.255.0 192.168.<X+5>.2 [58]
+◦
+R3(config)# ip route 192.168.<X+2>.0 255.255.255.0 192.168.<X+5>.2 [58]
+◦
+R3(config)# ip route 192.168.<X+3>.0 255.255.255.0 192.168.<X+4>.2 [58]
+
+Verificação:
+◦
+Visualizar as tabelas de encaminhamento com show ip route [59].
+◦
+Verificar a conectividade entre Host A e Host B, e Host A e R3, usando ping [59].
+Exercício 4: Rota de Omissão (Default Route)
+
+Objetivo: Substituir as rotas estáticas introduzidas anteriormente por uma rota de omissão (0.0.0.0 0.0.0.0) no router R1, usando o IP da interface 1 do R2 como próximo salto [39].
+
+Configuração do Router (R1):
+◦
+R1# config t [58]
+◦
+R1(config)# no ip route 192.168.<X+3>.0 255.255.255.0 192.168.<X+2>.2 (eliminar rotas estáticas) [58]
+◦
+R1(config)# no ip route 192.168.<X+4>.0 255.255.255.0 192.168.<X+2>.2 [60]
+◦
+R1(config)# no ip route 192.168.<X+5>.0 255.255.255.0 192.168.<X+2>.2 [60]
+◦
+R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.<X+2>.2 [60]
+◦
+R1(config)# exit [60]
+
+Verificação:
+◦
+R1# show ip route para observar a nova tabela de encaminhamento [60].
+Exercício 5: Encaminhamento Dinâmico Usando RIP
+
+Objetivo: Configurar o protocolo RIP em todos os routers no cenário da ficha [61].
+
+Configuração do Router 1 (R1):
+◦
+R1# config t [60]
+◦
+R1(config)# router rip [60]
+◦
+R1(config-router)# version 2 [60]
+◦
+R1(config-router)# network 192.168.<X+1>.0 [60]
+◦
+R1(config-router)# network 192.168.<X+2>.0 [62]
+◦
+R1(config-router)# passive-interface e0 [62]
+◦
+R1(config-router)# end [62]
+
+Configuração do Router 2 (R2):
+◦
+R2# config t [62]
+◦
+R2(config)# router rip [62]
+◦
+R2(config-router)# version 2 [62]
+◦
+R2(config-router)# network 192.168.<X+2>.0 [62]
+◦
+R2(config-router)# network 192.168.<X+3>.0 [62]
+◦
+R2(config-router)# network 192.168.<X+4>.0 [62]
+◦
+R2(config-router)# network 192.168.<X+5>.0 [62]
+◦
+R2(config-router)# passive-interface g0/1/2 (Nota: O PL03 indica R1(config-router)#passive-interface g0/1/2, mas pela lógica do cenário e do router R2, o comando deve ser aplicado ao R2) [62]
+◦
+R2(config-router)# end [62]
+
+Configuração do Router 3 (R3):
+◦
+R3# config t [62]
+◦
+R3(config)# router rip [62]
+◦
+R3(config-router)# version 2 [62]
+◦
+R3(config-router)# network 192.168.<X+4>.0 [62]
+◦
+R3(config-router)# network 192.168.<X+5>.0 [62]
+◦
+R3(config-router)# end [62]
+
+Verificação:
+◦
+ping e traceroute para verificar a conectividade de todos os elementos [61].
+◦
+show ip route para ver as tabelas de encaminhamento [61].
+◦
+show ip route <end_destino> para rotas individuais [61].
+◦
+Determinar a rota escolhida pelo RIP entre R2 e R3 para as redes 192.168.(X+1).0, 192.168.(X+2).0 e 192.168.(X+3).0 e explicar o porquê [63].
+◦
+Desligar o cabo de rede correspondente à rota escolhida e verificar se o RIP encontra a rota alternativa [63].
+◦
+show ip protocols para informações detalhadas sobre os protocolos de encaminhamento [63].
+◦
+debug ip rip para observar o funcionamento em tempo real (cancelar com no debug ip rip) [63].

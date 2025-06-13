@@ -1,0 +1,214 @@
+Ficha 5: Border Gateway Protocol (BGP)
+**Objetivos e Tópicos Abordados:**Esta ficha foca-se na configuração e utilização do Border Gateway Protocol (BGP), um dos protocolos de encaminhamento mais complexos. É um protocolo de encaminhamento exterior (EGP), usado principalmente no backbone da Internet (entre ISPs) ou em redes periféricas com múltiplas ligações a ISPs [87]. Os tópicos incluem a configuração básica de BGP-4 em routers Cisco, utilização de iBGP e eBGP, filtragem de rotas e definição de preferências de encaminhamento [88].
+Conceitos Chave de BGP:
+
+BGP é o protocolo de encaminhamento utilizado entre Sistemas Autónomos (AS) distintos [87].
+
+A configuração do BGP começa com router bgp <número_AS>, onde o número AS é globalmente significativo (ao contrário do OSPF) [89].
+
+Anúncio de Redes: Utiliza network <rede> mask <máscara> [90].
+
+Vizinhos BGP (BGP peers): Definidos com neighbor <endereço_IP> remote-as <número_AS> [90].
+◦
+iBGP (internal BGP): Se o remote-as for o mesmo número AS [90].
+◦
+eBGP (external BGP): Se o remote-as for um número AS distinto [90].
+
+Sincronização (no synchronization): Geralmente desativada para que os routers BGP possam anunciar rotas mesmo que não sejam conhecidas por um protocolo de encaminhamento interior [91].
+
+Auto-sumarização (no auto-summary): Desativada para evitar a sumarização de rotas com base no esquema classful, sendo mais comum com CIDR [91].
+
+default-originate: Adicionado ao comando neighbor para anunciar uma rota de omissão a um vizinho [92]. Requer uma rota de omissão (ip route 0.0.0.0 0.0.0.0 <próximo_salto>) [93].
+
+next-hop-self: Usado com vizinhos iBGP para forçar o router iBGP que anuncia a rota a ser o próximo salto [93]. Por defeito, um router iBGP anuncia rotas tal como as recebeu [93].
+
+bgp dampening: Assegura a estabilidade das rotas, colocando rotas instáveis em estado 'hold-down' [94].
+
+Redistribuição (BGP e OSPF): O comando redistribute ospf <process-id> permite injetar rotas aprendidas por OSPF no BGP [95].
+
+Filtragem de Rotas: Funcionalidade crucial para policy routing. filter-list com ip as-path access-list pode filtrar rotas com base na sequência de Sistemas Autónomos (AS paths) [95, 96]. Expressões regulares (.*, ^$, ^250$, ^(150|250|350)$, ^150_, _150_, _150$) são usadas para definir os filtros [97].
+
+local preference: Um parâmetro BGP trocado entre routers BGP do mesmo AS para determinar qual ligação externa deve ser preferida para acesso ao exterior [98]. O valor de omissão é 100; valores maiores indicam maior preferência [98]. É configurado usando um route-map [99].
+--------------------------------------------------------------------------------
+Resolução dos Exercícios da Ficha 5 (Baseado em "Ficha 5.pdf" e "PL05.pdf"):
+Passos Básicos Gerais de Configuração:
+1.
+Os mesmos passos iniciais de ligação e configuração do Hyperterminal [100].
+2.
+Ligar o Router: Ethernet – espaço de cima; Fast Ethernet – espaço de baixo (conforme o modelo) [100].
+Exercício 1: Configuração Básica do Border Gateway Protocol
+
+Objetivo: Configurar o cenário BGP da Figura 1 [101]. Cada router deve anunciar as suas redes ligadas, ISP1/ISP2/R1/R2 correm OSPF e BGP, rotas OSPF redistribuídas para BGP [101]. Não deve ser efetuada sincronização no AS 3000, mas deve-se usar route dampening. R1 e R2 devem colocar-se como next-hop-self para as rotas que anunciam mutuamente. Não deve haver sumarização de rotas BGP nem rotas de omissão [101, 102]. Verificar a conectividade (ping), tabelas BGP (show ip bgp) e tabelas de routing (show ip route) [102].
+
+Configuração do ISP1 (AS 1000):
+◦
+ISP1> enable, ISP1# config t [103]
+◦
+Configuração das interfaces: int g0/0/0 (192.168.<X+1>.254), int g0/1/0 (vlan 10, 10.
+◦
+ISP1(config)# router ospf 100 [104]
+◦
+ISP1(config-router)# network 192.168.<X+1>.0 0.0.0.255 area 0, exit [104]
+◦
+ISP1(config)# router bgp 1000 [104]
+◦
+ISP1(config-router)# bgp dampening [104]
+◦
+ISP1(config-router)# redistribute ospf 100 [104]
+◦
+ISP1(config-router)# network 172.16.<X>.0 mask 255.255.255.0 [105]
+◦
+ISP1(config-router)# network 10.<X>.1.0 mask 255.255.255.0 [105]
+◦
+ISP1(config-router)# neighbor 10.<X>.1.254 remote-as 2000 (vizinho eBGP para ISP2) [105]
+◦
+ISP1(config-router)# neighbor 172.16.<X>.254 remote-as 3000 (vizinho eBGP para R1) [105]
+◦
+ISP1(config-router)# no auto-summary [105]
+◦
+ISP1(config-router)# end [105]
+
+Configuração do ISP2 (AS 2000):
+◦
+ISP2> enable, ISP2# config t [105]
+◦
+Configuração das interfaces: int g0/0/0 (192.168.<X+2>.254), int g0/1/0 (vlan 10, 10.
+◦
+ISP2(config)# router ospf 100 [107]
+◦
+ISP2(config-router)# network 192.168.<X+2>.0 0.0.0.255 area 0, exit [107]
+◦
+ISP2(config)# router bgp 2000 [107]
+◦
+ISP2(config-router)# bgp dampening [107]
+◦
+ISP2(config-router)# redistribute ospf 100 [107]
+◦
+ISP2(config-router)# network 172.30.<X>.0 mask 255.255.255.0 [107]
+◦
+ISP2(config-router)# network 10.<X>.1.0 mask 255.255.255.0 [107]
+◦
+ISP2(config-router)# neighbor 10.<X>.1.253 remote-as 1000 (vizinho eBGP para ISP1) [107]
+◦
+ISP2(config-router)# neighbor 172.30.<X>.253 remote-as 3000 (vizinho eBGP para R2) [108]
+◦
+ISP2(config-router)# no auto-summary [108]
+◦
+ISP2(config-router)# end [108]
+
+Configuração do R1 (AS 3000):
+◦
+R1> enable, R1# config t [108]
+◦
+Configuração das interfaces: int e0 (172.16.
+◦
+R1(config)# router ospf 100 [108]
+◦
+R1(config-router)# network 192.168.<X+3>.0 0.0.0.255 area 0, exit [108]
+◦
+R1(config)# router bgp 3000 [108]
+◦
+R1(config-router)# no synchronization [109]
+◦
+R1(config-router)# bgp dampening [109]
+◦
+R1(config-router)# redistribute ospf 100 [109]
+◦
+R1(config-router)# network 172.16.<X>.0 mask 255.255.255.0 [109]
+◦
+R1(config-router)# neighbor 172.16.<X>.253 remote-as 1000 (vizinho eBGP para ISP1) [109]
+◦
+R1(config-router)# neighbor 192.168.<X+3>.253 remote-as 3000 (vizinho iBGP para R2) [109]
+◦
+R1(config-router)# neighbor 192.168.<X+3>.253 next-hop-self [109]
+◦
+R1(config-router)# no auto-summary [109]
+◦
+R1(config-router)# end [109]
+
+Configuração do R2 (AS 3000):
+◦
+R2> enable, R2# config t [109]
+◦
+Configuração das interfaces: int e0 (172.30.
+◦
+R2(config)# router ospf 100 [110]
+◦
+R2(config-router)# network 192.168.<X+3>.0 0.0.0.255 area 0, exit [110]
+◦
+R2(config)# router bgp 3000 [110]
+◦
+R2(config-router)# no synchronization [110]
+◦
+R2(config-router)# bgp dampening [110]
+◦
+R2(config-router)# redistribute ospf 100 [110]
+◦
+R2(config-router)# network 172.30.<X>.0 mask 255.255.255.0 [110]
+◦
+R2(config-router)# neighbor 172.30.<X>.254 remote-as 2000 (vizinho eBGP para ISP2) [111]
+◦
+R2(config-router)# neighbor 192.168.<X+3>.254 remote-as 3000 (vizinho iBGP para R1) [111]
+◦
+R2(config-router)# neighbor 192.168.<X+3>.254 next-hop-self [111]
+◦
+R2(config-router)# no auto-summary [111]
+◦
+R2(config-router)# end [111]
+
+Configuração do Host A:
+◦
+Configurar o PC com IP address: 192.168.<X+1>.1, Subnet mask: 255.255.255.0, Default gateway: 192.168.<X+1>.254 [112].
+
+Configuração do Host B:
+◦
+Configurar o PC com IP address: 192.168.<X+2>.1, Subnet mask: 255.255.255.0, Default gateway: 192.168.<X+2>.254 [112].
+
+Verificação:
+◦
+ping para verificar a conectividade entre as diversas redes dos diferentes AS [102].
+◦
+show ip bgp nos routers R1, R2, ISP1 e ISP2 para obter a tabela BGP e identificar caminhos alternativos [102].
+◦
+show ip route nos mesmos routers para comparar com a tabela BGP [102].
+Exercício 2: Definição de Preferências de Encaminhamento (Local Preference)
+
+Objetivo: Aumentar a local preference de R2 para R1 para 500 [99]. Forçar a atualização das tabelas BGP com clear ip bgp * [113]. Verificar as tabelas BGP e de routing, a conectividade e qual ISP é preferencial para o tráfego [113, 114]. Desativar a ligação preferencial, forçar atualização e verificar as alterações [114, 115].
+
+Configuração do R1:
+◦
+R1# config t [112]
+◦
+R1(config)# router bgp 3000 [116]
+◦
+R1(config-router)# neighbor 192.168.<X+3>.253 route-map PREF in (Aplica um route-map chamado PREF para rotas recebidas do vizinho iBGP R2) [116]
+◦
+R1(config-router)# route-map PREF permit 10 [116]
+◦
+R1(config-router)# set local-preference 500 [116]
+◦
+R1(config-router)# end [116]
+
+Verificação (Após configuração):
+◦
+Forçar a atualização das tabelas de BGP com clear ip bgp * em todos os routers [113].
+◦
+Aguardar a atualização das tabelas [113].
+◦
+Obter a tabela de BGP e de routing nos routers R1, R2, ISP1 e ISP2 [113].
+◦
+Verificar a conectividade com ping [114].
+◦
+Determinar se o tráfego sai preferencialmente pelo ISP1 ou pelo ISP2 [114].
+
+Verificação (Após desativação da ligação):
+◦
+Desativar a ligação entre R1 e ISP1 ou entre R2 e ISP2 (consoante a saída preferencial) [114].
+◦
+Forçar a atualização das tabelas BGP com clear ip bgp * em todos os routers [114].
+◦
+Aguardar a atualização das tabelas [114].
+◦
+Verificar as alterações nas tabelas BGP e de routing [114].
+◦
+Verificar a conectividade com ping [115].
