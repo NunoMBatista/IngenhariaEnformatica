@@ -58,6 +58,7 @@ BGP messages are sent using TCP, which ensures reliable and segmented transmissi
 	- `ip as-path access-list [access-list-number] permit [regex]`
 		- Example: 
 			- `ip as-path access-list 1 permit _(400|500|600)_` (permits routes containing AS 400, 500, or 600).
+			- `ip as-path access-list 1 permit ^$` (this router will only advertise its own originated routes and those redistributed from OSPF to its eBGP neighbors).
 
 **Example Configuration Snippet**
 
