@@ -1,7 +1,0 @@
-package main;
-
-func parseArgs() {
-    for arg = range args {
-        fmt.Println(arg);
-    }
-}

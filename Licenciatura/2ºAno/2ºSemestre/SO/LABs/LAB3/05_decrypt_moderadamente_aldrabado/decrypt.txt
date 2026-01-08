@@ -1,6 +1,0 @@
-operating c1a55efe8fd9efed48836d50691cdae4
-system 54b53072540eeeb8f8e9343e71f28176
-software f9fa10ba956cacf91d7878861139efb9
-computer df53ca268240ca76670c8566ee54568a
-hardware 3ca14c518d1bf901acc339e7c9cd6d7f
-programs 53689aacbba32f62a7ee90c641493951

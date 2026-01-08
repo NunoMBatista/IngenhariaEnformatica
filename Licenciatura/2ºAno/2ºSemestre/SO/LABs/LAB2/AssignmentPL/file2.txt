@@ -1,6 +1,0 @@
-total 12
-drwxr-xr-x 2 nuno nuno 4096 Feb 11 12:24 .
-drwxrwxrwx 3 nuno nuno 4096 Feb 11 12:15 ..
--rw-r--r-- 1 nuno nuno    2 Feb 11 12:23 file1.txt
--rw-r--r-- 1 nuno nuno    0 Feb 11 12:24 file2.txt
-End of file
