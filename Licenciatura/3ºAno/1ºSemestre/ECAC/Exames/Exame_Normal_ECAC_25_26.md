@@ -59,7 +59,7 @@ Preparação dos dados de entrada para uma tarefa de aprendizagem computacional:
 Numa modelação linear para imputação de dados observa-se que:
   - A dimensão do modelo é determinável a partir dos dados.
   - A dimensão do modelo não é determinável a partir dos dados.
-  - As outras duas opções eram sobre a utilização de variáveis independentes
+  - As outras duas opções eram sobre a utilização de variáveis independentes e contínuas
 
 ### Pergunta 2
 
