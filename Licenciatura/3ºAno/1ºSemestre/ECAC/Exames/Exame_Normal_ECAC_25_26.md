@@ -63,17 +63,25 @@ Numa modelação linear para imputação de dados observa-se que:
 
 ### Pergunta 2
 
-Davam uma tabela com 12 doentes, passos diários (valores entre os 540 passos e os 7000 passos), se o doente era fumador(Y/N), tinha creatina alta(Y/N) e a última linha era o risco cardiovascular(**A**lto/**B**aixo).
+Considere o seguinte conjunto de varáveis categóricas adquiridas de um conjunto de 12 doentes:
+
+| Doente | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Passos Diários** | 640 | 1650 | 1700 | 1800 | 2000 | 3000 | 540 | 5000 | 6500 | 5500 | 7000 | 3000 |
+| **Fumador** | S | N | S | S | N | N | N | S | S | S | N | S |
+| **Creatinina Alta** | S | N | N | S | S | N | N | N | N | N | N | S |
+| **Risco Cardiovascular** | B | B | A | A | B | B | B | B | A | A | A | B |
+
+Assumindo que S=”Sim”, N=”Não” e A="Alto", B="Baixo".
+
 
 #### Pergunta 2. a) 
 
-Ranking de atributos baseado na informação mútua
-
-
+Considere que lhe é pedido que projete um preditor do risco cardiovascular usando um dos atributos categóricos como entrada. Nesse contexto, apresente o ranking de atributos usando a metodologia baseada em Informação Mútua. Apresente todos os cálculos; não use implementações computacionais.
 
 #### Pergunta 2. b) 
 
-Fazer a 1ª iteração do binning baseado na entropia, utilizando a variável "Passos Diários". (O split era feito no 5º Doente, sendo que o 5º doente fica no 1º bin)
+Apresente a primeira iteração do algoritmo de binning da variável "Passos Diários" baseado na entropia correspondente à avaliação de um eventual split no 5º doente (comsidere que pertence ao 1º set). Apresente os seus cálculos.
 
 ### Pergunta 3
 
@@ -118,13 +126,15 @@ Pergunta sobre o dilema viés-variância
 
 ### Pergunta 5
 
+Considere a seguinte imagem em escala de cinzentos (tamanho: 6*5, níveis possíveis: {0,1,2})
+
 #### Pergunta 5.1
 
-Era dada uma matrix (6x5) de cinzentos com intensidade {0, 1, 2}, distância = 3 e angulo = 90º. O objetivo era fazermos a matrix GLCM.
+Apresente a Gray-Level Co-occurance Matrix (GLCM), considerando a direção vertical e a distância de 3 pixéis.
 
 #### Pergunta 5.2
 
-Calcular o contraste a partir da matrix GLCM
+Calcule o contraste a partir da GLCM. Nota: se não resolveu o exercício anterior, considere a seguinte GLCM
 
 ### Pergunta 6
 
