@@ -1,0 +1,230 @@
+Orthogonal projection
+- https://en.wikipedia.org/wiki/Orthographic_projection
+
+there is no infinity for this type of projeciton. 
+We need to define something like "begin" and "end" planes.
+
+In orthographic projection (as described in the Wikipedia article you linked), 
+projection rays are parallel, not converging to a point like in perspective projection. 
+So you're correct: there is no “infinity point” or field-of-view angle.
+
+
+Short Answer
+You need two planes:
+- Near plane → defines where rendering begins.
+- Far plane → defines where rendering ends.
+They define the depth clipping region, not perspective behavior.
+
+Idea (?): turn the object / its transformation into identity projection. Only then can "draw".
+
+This sort of operation (scaling) is done for every x, y, and z.
+r-l => largura do prisma; must devide to tranform into unity
+2 => assumes l = 2 (?)
+
+then the tranlsation is done so that the object is centered into our projection.
+
+Figure 1: start projections
+
+The corected projection is:
+\[
+M_{ortho} =
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\
+0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\
+0 & 0 & -\frac{2}{f-n} & -\frac{f+n}{f-n} \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\]
+📦 What Each Term Means
+Scaling Terms
+2
+𝑟
+−
+𝑙
+r−l
+2
+	​
+
+2
+𝑡
+−
+𝑏
+t−b
+2
+	​
+
+−
+2
+𝑓
+−
+𝑛
+−
+f−n
+2
+	​
+
+
+They normalize width/height/depth into [-1,1].
+
+Translation Terms
+−
+𝑟
++
+𝑙
+𝑟
+−
+𝑙
+−
+r−l
+r+l
+	​
+
+−
+𝑡
++
+𝑏
+𝑡
+−
+𝑏
+−
+t−b
+t+b
+	​
+
+−
+𝑓
++
+𝑛
+𝑓
+−
+𝑛
+−
+f−n
+f+n
+	​
+
+
+They shift the box center to the origin.
+
+
+----
+
+
+Next. For some programs i want ot apply a bunch of transformations... But , as i operate, i loose precision...
+There is something we do  to compensate over that...
+
+f(quaternion) = new_quaternion´
+
+But:
+f [x, y, z, 1] = [a, b, c, 0.998]
+
+How did i get to that?
+It is some way to track how much precision i lost and then compensate: divide by the new value! Then it is noramlized:
+
+[a, b, c, 0.998] / 0.998 = [a', b', c', 1]
+
+----´
+
+We acltulay do domehitng similar in Figura 1. But we divide by z!
+So the correction we do follow this logic
+
+P * [x, y, z, 1] = [a, b, c, (does not matter...)]
+
+    plug into that z !
+    => [a, b, c, z]
+
+    And then noramlize!
+    [a, b, c, z] / z =
+    [a/z, b/z, c/z, 1]  -> perfectly normalized to the plane we want
+
+The new corrected matrix becomes:
+\[
+M_{ortho}^{(new)} =
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & -\frac{r+l}{r-l} & 0 \\
+0 & \frac{2}{t-b} & -\frac{t+b}{t-b} & 0 \\
+0 & 0 & -\frac{f+n}{f-n} & -\frac{2}{f-n} \\
+0 & 0 & -1 & 0
+\end{bmatrix}
+\]
+
+
+🧠 Why This Works
+
+Because after multiplication you now get:
+
+𝑤
+′
+=
+−
+𝑧
+w
+′
+=−z
+
+So the normalization step (division by 
+𝑤
+′
+w
+′
+) restores the correct scaling.
+
+You’ve essentially:
+
+Moved translation into the z-column
+
+Used the homogeneous coordinate to carry depth scaling
+
+Converted affine orthographic into a projective representation
+
+🔎 Geometric Meaning
+
+Original matrix:
+
+Pure affine transform
+
+No perspective divide effect
+
+New matrix:
+
+Uses homogeneous trick
+
+Depth scaling handled through 
+𝑤
+w
+
+Looks structurally closer to perspective projection
+
+
+
+----
+we are doing all of this why? 
+Because this  is the basics to understand how OpenGL applies its transformation.
+With one small difference... Their reference is according to -z (not z).
+So their matriz later appears with negative value in z.
+
+
+---
+
+
+Distance fromnear plae.
+Teacher hods pen in fornt his face. Turns left and right.
+For  him pen moves a lot, ofr me no.
+Idea was: reserve more space for the closest distances.
+Fig 2.
+
+---
+
+what is anti aiasing? (info topic)
+yt vid. fxaam, smaa, msaa/ssaa (etc.)
+
+
+fxaa
+- checks derivatives of points. If high, apply blur (edge)
+msaa
+- calculates 4 virtual pixels and (...?)
+
+And some do both at the same time.
+
+---
+

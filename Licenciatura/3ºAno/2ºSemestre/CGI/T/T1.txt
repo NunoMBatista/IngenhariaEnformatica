@@ -1,0 +1,67 @@
+***Métodos de avaliação***
+Notafinal é dividida em...
+	=> T 40% exame 
+	=> PL-60%
+		6 assignments, 10% each; 2 written defenses 
+
+
+***GPU VS CPU***
+
+GPU são boas a fazer muitos cálculos simultâneo mas o constituinte de cada uma é pior se comparar com um unico core de CPU.
+
+Podemos programar com CPU (o que temos feito maioritariamente até agora no curso todo).
+Mas GPU requer uma linguagem diferente de programação: GLSL é exemplo.
+Então sou obrigado: atributos + código (via API).
+	Tenho que mandar os atributos à GPU o material sobre ela operar e as instruções.
+
+APIs: CUDA, Tensorrt, Vulkan, Metal, etc.
+Vamos trabalhar com Vulkan. (vulkan é a que mais se usa na industria hoje em dia).
+
+
+Trabalho 1: Vulkan Boilerplate
+Programar em Vulkan é simples, mas chato, porque tem muito código "gordura".
+Para fazer uma coisa simples, temos que declarar muita coisa.
+
+1st) Create a window (GLFW)
+2nd) Create an instance
+	Must be always initialized empty !
+	vk_(something)
+	VkInstanceCreateInfo
+		We need to create the attributes/ description in order to create the instance.
+	After creating the instance, we can create a surface. <-> GLFW
+
+So basically the surface itself is our screen and there we will render our images and objects.
+We need to contact the surface through vulkan.
+	- After creating the surface i can create a PhysicalDevice (=GPU)
+	- But not finished yet... In order to make things with the PhysicalDevice we need to Create the logical Device. 
+		This is like the API that operates the physical device.
+	- Finally, we have a queue. (i did not understand the need of the queue).
+
+
+After having all of this setup, we can continue to work with Vulkan.
+VK and VKL
+
+Parte 1.1: SWAP CHAIN
+	This now will interact with every single part that we declared before.
+	Beware => Tearing !
+	A solution for this is: instead of one image, use two!
+	So the swap chain does this: it uses several images at the same time and , while the screen shows one image, 
+	the next image is already being rendered...
+	So it than can effectively show the correct order of images without tearing !
+
+
+PArt 1.2: Create instance
+	getRequiredInstaceExtensions -> his fetches the necessary APIs to render the image (layers)
+	Validation layer -> debugging
+	
+	instace_create_info.enabledExtensionCount = statc_cast<unit32_t>(required.entension.size());
+
+	.enableExtensionCount  //how many
+	.ppenabledExtensionNames = required_extensions.data()  // which ones
+	.__LayerCount = static_cast<uint32_t>(enabled_layered.size())  // how many
+	.__LayerNames = enabled_layered.data()  // which ones
+	.pApplication = &appInfo;
+	stype = VK_Static:type -> este já está lá ...
+
+	So we need to create so many things to be able just to create the instance itself !
+	vkCreateInstance(&instance_create_info,VN_NULL_HANDLE, &vk_instance);

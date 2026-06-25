@@ -1,0 +1,180 @@
+Recordar: 
+    Trabalho 1
+    - fazer o teapot
+    - foco no ciclo while true e no conceito de swapchain
+    Mas o que queremos perceber é o que está a contecer no ciclo while true. For that -> we need geometry!
+
+Existem "vários tipos de geometria":
+- point cloud
+- voxel (ex: minecraft)
+- polylgon mesh
+
+https://duckduckgo.com/?q=types+of+geometry+point+loud+polygon+mesh+bunny&ia=images&iax=images&iai=https%3A%2F%2Fwww.mdpi.com%2Fsensors%2Fsensors-22-07040%2Farticle_deploy%2Fhtml%2Fimages%2Fsensors-22-07040-g001-550.jpg
+
+- why focus on triangles?
+The simples geometric forma of all: theory -> you can decompose any form into triangles.
+
+=> Pin hole projection
+- you can draw a cube on a 2D surface but you still "see it" in 3D
+https://en.wikipedia.org/wiki/Pinhole_camera_model
+
+This happens in the eye also -> how wee see.
+CGI is based on the same principle but istead of a "tela" in a phtograph or our eye, we are working with a screen.
+So we need to understand how this geometric rules work, *mathmatically* , so that we can "draw" a picture/photograph in the screen.
+So we need to understand "the geometry related to the mapping of a pinhole camera" 
+
+But take into consideration something:
+- there are diferent kinds of projections... Because there are also different types of cameras ! 
+This means there are different ways to ""se to the world"". So the mathmatical and geometrical translation will also vary.
+
+Projections:
+- perspective
+- orthographic
+- fish.eye
+- others...
+
+Lets say we want to translate a cube into space... using matrixes.
+Lets fetch each vertix and define their coordinates, (x, y, z).
+So, for a cube we will have a N*3 matrix (n the number of vertices, and 3 the 3D space).
+
+We need to trnalsate this into a screen.
+The screen is  a 2D surface !
+
+So we need;
+(N*3) * P = (N*2)
+
+The P is a "magical" thing that can make the translation into a 2D surface (still have N point, but now translated into 2 dimentions!
+
+P(4x4)
+Note that this matrix that we use will always be a 4*4 matrix.
+Let's try and see why.
+
+Lets take a transformation:
+x' = x
+y' = y
+z' = z
+
+If i stay still this relation will maintain.
+Let's say i want to move to units the right:
+x' = x + 2
+y' = y
+z' = z
+
+This is translation.
+I can also do rotation (upside down in the following case):
+
+x' = -x
+y' = -y
+z' = z
+
+Doing this one by one this is really boring...
+I can do this instantaneoulsy... and simultanously... with matrixes.
+
+Let's start by translataing rotaion into a matrix.
+(I'm jumping ahead and say we want to get to:
+https://en.wikipedia.org/wiki/Rotation_matrix
+)
+
+Ex: matrix I.3 * [x,y,z] = [x',y',z']
+
+But recall the rotation operation (-x and -y in the transformation)
+
+This will translate into:
+I.3' * [x,y,z] = [x',y',z']
+I.3' where 1,1 is neg and 2,2 is also neg.
+
+This  for rotaion is enough... But what if i want to invert it (rotation 180) and move 2 to the right...
+Where in this I.3'do i have space to include the two? Nightmare ! Nowhere !!!
+
+One solution for this is to use quaternions.
+So now we would have something like:
+
+I.4 * [x,y,z] = [x',y',z']
+
+BUT -> algebra rule broken... I can multiply 4*4 matrix by 3*3...
+So now we will use quaternions 
+Our operations will become something like:
+
+I.4 * [x,y,z,w] = [x',y',z', w']
+
+Now note something... x, y, and z will be reserved for polinomial... linear transofrmation.
+And w will be reserved for 0'type transformation -> translation !
+So at all point we will have to use w=1 -> if this is not true we messed up somewhere !
+
+-1 0 0 -2       x       x'
+0 -1 0 0        y       y'
+0 0 1 0         z       z'
+0 0 0 1         w       (w')
+
+The main from this for now is ->  to deal with geometric stuff we need 4*4 matrix ! 
+
+(N*3) * P = (N*2)
+Our goal is to calculate and define P -> this is the projection matrix and it will have this 4*4 format, 
+for the reasons we explained.
+
+Now consider something: this P will vary acoording to FOV (field of view) of spectator.
+Concepts: far plane (f), near plane (n).
+
+So for the projection matrix we actually need 4 parameters (at least for the 1st assingment)
+- far plane, near plane, FOV, aspect (i think it were these four)
+
+--------------------------------------
+
+- Geoetry Types -> Meshes
+- Perspective Projections -> 4*4 matrix
+- Translations and rotations -> 4*4 matrix
+- Quaternions -> 4*1 vector (with a static 1 element in the end, w)
+
+In the object format:
+If we tranalte that into IDE we will see bunch of lines...
+
+Some start with v
+    Ex: v 3.05 4.5 15
+    There are vertices!
+
+Other start with f -> these are faces - connections of some vertices...  
+    Image a square ... we want to translate them into planes... We can decompose the sqwaure into two trangles -> 
+    the two faces we want to translate.
+    So imagine the following square (specifically the vertices)
+    .3  .2
+    .0  .1
+    
+    from these we can draw two vertices:
+    f 0 1 2
+    f 2 3 0
+    This means we have a triangle/face with the sides connected between the vertices 0, 1 and 2. 
+    And then another one with the vertices 0, 2, and 3.
+
+    Extra concept: degenerate geometry - when the geometry does not make sense.
+    Ex: 
+    f 0 1 2
+    f 2 3 0
+    f 1 2 3
+    The face 1,2,3 is overlayed over the other two.. its unnecessary and makes no sense.
+
+    Extra: drawing the vertices counterclockwise or clockwise. This is not critical for now.
+        Ex: https://en.wikipedia.org/wiki/Back-face_culling
+
+
+----------------------
+
+There are different types of rendering
+- Rasterisation
+- Ray tracing
+
+Rasterisation -> which is the fastes and simplist way to translate something into 2D convincing the guest to understand and perceive reality
+Ray tracing -> tries to ensure the physics of law in the animation
+
+
+How does ray tracing work:
+- project millions of millions of light particles into an object and check how uch goes into the camer (in a very simples way)
+
+
+How does rasterisation work?
+- project (vertices) and paint (fill in with color). done 
+Which means: send vertices into the GPU. This does the projection. 2D Cores.
+Then we must color - shading. For the lattter we need not only the coordinates, but also the faces (to know where is light and dark, etc.)
+This means that we only need two shaders (two programs that run in the GPU) - one for projeciton, the other for shading.
+The name given was 'shader' because it was the first operation succeeded in the GPU.
+Technically, you could call the programs as 'vertex shader' and 'fragment shader'.
+

@@ -1,0 +1,134 @@
+Let's recall the flux of material...
+The vectors are fed into a vector shader (f) , then these are transofmed.
+The resulting transformation of the shader is then fed into the fragment shader, and this one also outputs something.
+
+V ->  [ Vector Shader ]  -> [   ] ->  [  Fragment shader  ] -> [  ]
+
+Recall the types of rendering we spoke about last week:
+- Rasterization (the painter knows where each object is in its sheet; then he colors it)
+- Raytracing (its a physical simulation; as the name suggest, we follow the behavior of rays on sunlight, 
+how it reflects uppon objects and then is fed into our camera)
+
+
+We also spoke about two types of projections:
+- parallel (all main lines of a picture are parallel)
+- perspective (from a main point, all "parallel" lines in the real world are drawn with respect to this main point)
+
+
+From last class we understood that we have to work with quaternions:
+- [x y z w ]
+w is the dummy element, always equal to 1.
+This was important to take both linear operations (rotation and scaling) and tranlsation into a single operation.
+
+This is how we work:
+    projection_matrix(4 * 4) * [ x y z w ] = [ a b c d ], w = 1
+    From left to right: projection matrix, input, output.
+
+Note: the teacher was always making the transformation as x', y', ... But i think that is too confusion.
+I just opted to use a,b,c. And i know that these will correspond to the transformed vertices into the 2D surface.
+
+Example of operations:
+- Translation
+$$
+\begin{bmatrix}
+1 & 0 & 3 \\
+0 & 1 & 5 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+
+- Scaling
+$$
+\begin{bmatrix}
+2 & 0 & 0 \\
+0 & 2 & 0 \\
+0 & 0 & 2 \\
+\end{bmatrix}
+
+- Rotation
+$$
+\begin{bmatrix}
+cos(theta) & -sin(theta) & 0 \\
+sin(theta) & cos(theta) & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+
+
+These last three are examples of 2D projection changes.
+In 2D we only have two plains for rotation... In 3D we have 3 plains, so we will actually have more matrizes of rotation... 
+One for each axis. Each also has a name: roll, pitch and yaw.
+This is just a note, but it is important to understand that it changes a bit.
+
+---
+Recall the projection matrix, and what it does. 
+Now introduce the view matriz if we haven't before. Once more, what is the difference between both? What does each one do?
+This is important to introduce the next topic. 
+
+--- 
+
+Q: When we render an image, and move it...
+    Who is actualy moving?
+    The camera? Or the world?
+    In theory either one or the other is correct, because we will get the same results with one or the other
+    considered as "the origin".
+
+But we will come back to this, becase this notion is important.
+In order to move something we must define the movement, then translate this into the projection matrix.
+Now  we actually need to calculate the inverse matrix of the projection matrix.
+Only then apply the transformation as the operation we saw before:
+    projection_matrix(4 * 4) * [ x y z w ] = [ a b c d ], w = 1
+
+Note: (why the inverse?)
+
+My operation becomes:
+    P * (View * V)
+
+P - projection matrix (transforms the camera space into clip space. Maps 3D into 2D.)
+View - transforms the world space into camera space (view space). It aplies camera position and rotation accoding to object 
+we want to 'photograph'.
+V - the vertices of our object.
+
+Recall the matricial operation of multiplication:
+    A * (B * C) = (A * B) * C
+We apply comutation in multplication... If we apply this to our case:
+
+    P * (View * V)
+    ...we can trun this calculation into:
+    (P * View) * V
+
+Why does this little detail matter?
+Because it is much easer to make this calculation: i am only feeding the GPU two small matrices (3*3 or 4*4).
+This is much best than having o apply first View to all the vertices... and then multiply P by the result we got before.
+I do not have to feed the GPU hunders and hunders of lines, accordign to he vertices i want to project...
+
+    This means: "It's easier to move the worl than the camera"
+
+Let's imagine i have two objects. I want to make their movement fairly independent... That is, i can operate 
+each one independently. But if, in the real world, they have some sort of dependency (physical behavior), then
+I have to tweek my matrices...
+    
+    P * V. M1 * x1
+    P * V M2 * x2
+P -> projection matrixes
+V -> view matrix
+M ->  mode matrix
+v -> vertices (object)
+
+View is unique -> it only concerns the camera itself.
+The model matrix, M1 and M2, are specific to the objects, x1 and x2.
+
+Now think about physical behavior, their hierarchy.
+Clip: a character jumps onto a carriage of a train. First both are still. But then  carriage starts moving.
+If the object were completely independ, and if no additional math consideres, the carriage would go on, 
+and the character would fall off from it... But that is not what happens in the real world (or what we want 
+in our program...). When the carriage strats moving the character goes along!
+Taht means that the movement that is applied in the carriage is also applied to the character.
+But that is not all. If the character iself want to move an arm, a leg... Then we also have to apply These
+transformations accordingly!
+
+That means we have a cascade, a hierarchy of movement, which translates into cumulative applciation of model matrices:
+
+    train           M(train)
+      |
+    character       M(train) * M(character)
+  /   |   \
+leg  arm   body     M(train) * M(character) * M(body)
